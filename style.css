@@ -1,0 +1,43 @@
+:root {
+    --m1: #7100b2;
+    --m2: #8e22bb;
+    --m3: #ab49cc;
+    --a1: #1e91ed;
+    --a2: #81c7ff;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--m1), var(--m2), var(--m3));
+    font-family: sans-serif;
+    color: white;
+}
+
+/* Caja de texto estilo celeste */
+input[type="text"],
+textarea {
+    background: var(--a2);
+    border: 2px solid var(--a1);
+    padding: 10px;
+    border-radius: 8px;
+    color: #003355;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 15px auto;
+}
+
+/* Botón estilo azul fuerte */
+button {
+    background: var(--a1);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: var(--m3);
+}
