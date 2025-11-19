@@ -44,33 +44,52 @@ nav a {
 table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 6px;
+  border-spacing: 0 8px;
+  font-family: sans-serif;
+  color: #000;
+}
+
+table thead th {
+  background: #d9d9d9;
+  padding: 10px;
+  border: 1px solid #444;
+  text-align: left;
+  font-weight: bold;
 }
 
 table tbody tr {
-  background: #ffffff;
+  background: #e6e6e6;
+  border: 1px solid #555;
   transition: all 0.25s ease;
 }
 
-table tbody tr:hover {
-  transform: scale(1.02);
-  z-index: 2;
-  background: #f0f0ff;
+table tbody tr td {
+  padding: 10px;
+  border-right: 1px solid #555;
 }
 
-/* Opacar todas las filas cuando una está en hover */
+table tbody tr td:last-child {
+  border-right: none;
+}
+
+/* Hover que expande y resalta */
+table tbody tr:hover {
+  transform: scale(1.02);
+  background: #f2f2f2;
+  z-index: 2;
+}
+
+/* Opacar el resto */
 table tbody:hover tr {
   opacity: 0.4;
-  filter: blur(0.5px);
 }
 
 table tbody tr:hover {
   opacity: 1;
-  filter: blur(0);
 }
 
-/* Efecto de “expansión real” (empuja otras filas) */
+/* Expansión real */
 table tbody tr:hover td {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
