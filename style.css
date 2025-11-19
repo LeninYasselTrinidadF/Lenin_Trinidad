@@ -41,6 +41,15 @@ nav a {
     transition: 0.2s;
 }
 
+#tabla-container {
+  padding: 20px;
+  border: 2px solid #444;
+  border-radius: 10px;
+  background: #f7f7f7;
+  width: 95%;
+  margin: auto;
+}
+
 table {
   width: 100%;
   border-collapse: separate;
