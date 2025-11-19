@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Biblioteca de Apuntes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 style="text-align:center;">Biblioteca de Apuntes</h1>
+  <table id="tabla">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Contenido</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Los datos se insertan aquí -->
+    </tbody>
+  </table>
+
+  <script type="module">
+    import { db } from "./firebase.js";
+    import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    async function cargarDatos() {
+      const tablaBody = document.querySelector("#tabla tbody");
+      tablaBody.innerHTML = "";
+
+      const q = query(collection(db, "apuntes"), orderBy("fecha", "desc"));
+      const snapshot = await getDocs(q);
+
+      snapshot.forEach(doc => {
+        const d = doc.data();
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${d.titulo}</td>
+          <td>${d.contenido}</td>
+          <td>${new Date(d.fecha).toLocaleString()}</td>
+        `;
+        tablaBody.appendChild(tr);
+      });
+    }
+
+    cargarDatos();
+  </script>
+</body>
+</html>
