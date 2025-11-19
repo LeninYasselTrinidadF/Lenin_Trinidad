@@ -41,5 +41,36 @@ nav a {
     transition: 0.2s;
 }
 
-nav a:hover {
-    color: var(-
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+table tbody tr {
+  background: #ffffff;
+  transition: all 0.25s ease;
+}
+
+table tbody tr:hover {
+  transform: scale(1.02);
+  z-index: 2;
+  background: #f0f0ff;
+}
+
+/* Opacar todas las filas cuando una está en hover */
+table tbody:hover tr {
+  opacity: 0.4;
+  filter: blur(0.5px);
+}
+
+table tbody tr:hover {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Efecto de “expansión real” (empuja otras filas) */
+table tbody tr:hover td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
