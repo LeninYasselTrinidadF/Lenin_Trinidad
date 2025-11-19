@@ -41,6 +41,22 @@ nav a {
     transition: 0.2s;
 }
 
+.sobre-mi {
+  display: flex;
+  align-items: center; /* centra verticalmente */
+  justify-content: space-between; /* separa texto e imagen */
+  gap: 20px; /* espacio opcional */
+}
+
+.sobre-mi .texto {
+  flex: 1; /* ocupa todo el espacio que pueda */
+  text-align: left;
+}
+
+.sobre-mi .imagen {
+  flex-shrink: 0; /* la imagen no se encoge */
+}
+
 
 table {
   width: 100%;
