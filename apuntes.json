@@ -5,7 +5,8 @@
     "archivo": "1_Proposiciones_Logicas.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "20%"
   },
   {
     "titulo": "Naturales",
@@ -13,7 +14,8 @@
     "archivo": "3_Naturales.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "40%"
   },
   {
     "titulo": "Enteros",
@@ -21,7 +23,8 @@
     "archivo": "4_Enteros.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "20%"
   },
   {
     "titulo": "Polinomios",
@@ -29,7 +32,8 @@
     "archivo": "6_Polinomios.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "20%"
   },
   {
     "titulo": "Geometria Plana",
@@ -37,7 +41,8 @@
     "archivo": "13_Geometria_Plana.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "20%"
   },
   {
     "titulo": "Geometría Analítica",
@@ -45,7 +50,8 @@
     "archivo": "14_Geometría Analítica.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "20%"
   },
   {
     "titulo": "Numeros Complejos",
@@ -53,7 +59,8 @@
     "archivo": "15_Numeros_Complejos.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
-    "nivel": "Colegio"
+    "nivel": "Colegio",
+    "estado": "20%"
   },
   { "archivo": "apuntes/Preliminar.pdf", 
     "titulo": "Preliminar de Tesis", 
