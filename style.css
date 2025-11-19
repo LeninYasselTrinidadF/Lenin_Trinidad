@@ -53,12 +53,12 @@ nav a {
   text-align: left;
 }
 
-.sobre-mi .imagen {
-    max-width: 150px; /* tamaño reducido */
-    height: auto;
-    border-radius: 10px;
+.sobre-mi .imagen img {
+  width: 80px;   /* ancho fijo más pequeño */
+  height: auto;   /* mantiene proporción */
+  object-fit: cover; /* evita deformaciones si es cuadrada/rectangular */
+  border-radius: 10px;
 }
-
 
 table {
   width: 100%;
