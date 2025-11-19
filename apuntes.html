@@ -19,22 +19,19 @@
 </table>
 
 <script>
-  const datos = [
-    { titulo: "Apunte 1", contenido: "Límites y filtros", fecha: "2025-02-19" },
-    { titulo: "Apunte 2", contenido: "Álgebra lineal — bases", fecha: "2025-02-20" },
-    { titulo: "Apunte 3", contenido: "EDP: u_t - u_x", fecha: "2025-02-21" }
-  ];
-
-  const tbody = document.querySelector("#tabla tbody");
-
-  datos.forEach(d => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${d.titulo}</td>
-      <td>${d.contenido}</td>
-      <td>${d.fecha}</td>
-    `;
-    tbody.appendChild(tr);
+  fetch("apuntes.json")
+    .then(r => r.json())
+    .then(lista => {
+      const tbody = document.querySelector("#tabla tbody");
+      lista.forEach(d => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${d.titulo}</td>
+          <td><a href="${d.archivo}" download>${d.contenido}</a></td>
+          <td>${d.fecha}</td>
+        `;
+        tbody.appendChild(tr);
+      });
     });
   </script>
 </body>
