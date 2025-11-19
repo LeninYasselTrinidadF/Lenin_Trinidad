@@ -2,50 +2,40 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Biblioteca de Apuntes</title>
+  <title>Lenin Trinidad</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1 style="text-align:center;">Biblioteca de Apuntes</h1>
+  <h1>Lenin Trinidad</h1>
   <table id="tabla">
-    <thead>
-      <tr>
-        <th>Título</th>
-        <th>Contenido</th>
-        <th>Fecha</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Los datos se insertan aquí -->
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Contenido</th>
+      <th>Fecha</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
-  <script type="module">
-    import { db } from "./firebase.js";
-    import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<script>
+  const datos = [
+    { titulo: "Apunte 1", contenido: "Límites y filtros", fecha: "2025-02-19" },
+    { titulo: "Apunte 2", contenido: "Álgebra lineal — bases", fecha: "2025-02-20" },
+    { titulo: "Apunte 3", contenido: "EDP: u_t - u_x", fecha: "2025-02-21" }
+  ];
 
-    async function cargarDatos() {
-      const tablaBody = document.querySelector("#tabla tbody");
-      tablaBody.innerHTML = "";
+  const tbody = document.querySelector("#tabla tbody");
 
-      const q = query(collection(db, "apuntes"), orderBy("fecha", "desc"));
-      const snapshot = await getDocs(q);
-
-      snapshot.forEach(doc => {
-        const d = doc.data();
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${d.titulo}</td>
-          <td>${d.contenido}</td>
-          <td>${d.area}</td>
-          <td>${d.nivel}</td>
-          <td>${new Date(d.fecha).toLocaleString()}</td>
-        `;
-        tablaBody.appendChild(tr);
-      });
-    }
-
-    cargarDatos();
+  datos.forEach(d => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${d.titulo}</td>
+      <td>${d.contenido}</td>
+      <td>${d.fecha}</td>
+    `;
+    tbody.appendChild(tr);
+    });
   </script>
 </body>
 </html>
