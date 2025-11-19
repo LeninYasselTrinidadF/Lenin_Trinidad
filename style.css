@@ -5,14 +5,12 @@
     --a1: #1e91ed;
     --a2: #81c7ff;
 }
-
 body {
     margin: 0;
     background: linear-gradient(180deg, var(--m1), var(--m2), var(--m3));
     font-family: sans-serif;
     color: white;
 }
-
 /* Caja de texto estilo celeste */
 input[type="text"],
 textarea {
@@ -26,7 +24,6 @@ textarea {
     display: block;
     margin: 15px auto;
 }
-
 /* Botón estilo azul fuerte */
 button {
     background: var(--a1);
@@ -37,7 +34,6 @@ button {
     cursor: pointer;
     font-weight: bold;
 }
-
 button:hover {
     background: var(--m3);
 }
