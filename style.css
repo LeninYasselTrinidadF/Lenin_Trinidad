@@ -1,39 +1,45 @@
 :root {
-    --m1: #7100b2;
-    --m2: #8e22bb;
+    --m1: #3a0066; /* morado oscuro */
+    --m2: #7100b2;
     --m3: #ab49cc;
     --a1: #1e91ed;
     --a2: #81c7ff;
 }
+
+/* Fondo general */
 body {
     margin: 0;
-    background: linear-gradient(180deg, var(--m1), var(--m2), var(--m3));
+    background: #000;
     font-family: sans-serif;
+    color: #fff;
+}
+
+/* Título centrado */
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin: 30px 0 10px 0;
     color: white;
 }
-/* Caja de texto estilo celeste */
-input[type="text"],
-textarea {
-    background: var(--a2);
-    border: 2px solid var(--a1);
-    padding: 10px;
-    border-radius: 8px;
-    color: #003355;
-    width: 100%;
-    max-width: 400px;
-    display: block;
-    margin: 15px auto;
+
+/* NAV */
+nav {
+    background: var(--m1);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 3px solid var(--m3);
 }
-/* Botón estilo azul fuerte */
-button {
-    background: var(--a1);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+
+/* Links del nav */
+nav a {
     color: white;
-    cursor: pointer;
+    text-decoration: none;
     font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.2s;
 }
-button:hover {
-    background: var(--m3);
-}
+
+nav a:hover {
+    color: var(-
