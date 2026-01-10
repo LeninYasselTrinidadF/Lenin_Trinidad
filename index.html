@@ -2,15 +2,17 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Lenin Trinidad</title>
-  <link rel="icon" type="image/png" href="icon.png">
+  <title>Lenin Trinidad - Matemáticas y Enseñanza</title>
+  <link rel="icon" type="image/png" href="imagenes/icon.png">
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Matemáticas, enseñanza y apuntes claros. Estudiante de Pregrado de Matemática con interés en análisis, álgebra y dinámica.">
 </head>
 <body>
   <header>
     <h1>Lenin Trinidad</h1>
     <nav>
-      <a href="index.html">Inicio</a>
+      <a href="index.html" class="active">Inicio</a>
       <a href="sobre.html">Sobre Mí</a>
       <a href="proyectos.html">Proyectos</a>
       <a href="blog.html">Blog</a>
@@ -22,27 +24,36 @@
     <section id="descripcion">
       <h2>Matemáticas, enseñanza y apuntes claros</h2>
       <p>Estudiante de Pregrado de Matemática: Interés en análisis, álgebra y dinámica. Comparto apuntes, 
-        recursos didácticos, mis proyectos personales y material que considere interesante. </p>
+        recursos didácticos, mis proyectos personales y material que considere interesante.</p>
+      <p class="tagline">"Las matemáticas no conocen razas ni fronteras geográficas; para las matemáticas, el mundo cultural es un país" - David Hilbert</p>
     </section>
 
-    <section id="highlights" style="margin-top:18px;">
-      <div class="card">
+    <section id="highlights">
+      <a href="sobre.html" class="card">
         <h3>Sobre mí</h3>
-        <p>Información Personal y Contacto</p>
-      </div>
-      <div class="card">
+        <p>Información Personal y Contacto. Conoce más sobre mi trayectoria académica y mis intereses en matemáticas.</p>
+        <span class="card-link">Ver más</span>
+      </a>
+      
+      <a href="apuntes.html" class="card">
+        <div class="badge">Nuevo</div>
         <h3>Apuntes organizados</h3>
         <p>Presento apuntes de los temas desarrollados en mis cursos dictados y en mi estudio personal. 
           Se actualizarán los archivos periódicamente.</p>
-      </div>
-      <div class="card">
+        <span class="card-link">Explorar apuntes</span>
+      </a>
+      
+      <a href="proyectos.html" class="card">
         <h3>Proyectos</h3>
-        <p>Trabajos personales.</p>
-      </div>
-      <div class="card">
+        <p>Trabajos personales, investigaciones y desarrollos en matemáticas y programación.</p>
+        <span class="card-link">Ver proyectos</span>
+      </a>
+      
+      <a href="blog.html" class="card">
         <h3>Blog</h3>
-        <p>Entradas cortas sobre mis experiencias.</p>
-      </div>
+        <p>Entradas cortas sobre mis experiencias, reflexiones y descubrimientos matemáticos.</p>
+        <span class="card-link">Leer blog</span>
+      </a>
     </section>
   </main>
 

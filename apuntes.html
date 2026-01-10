@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Lenin Trinidad</title>
-  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="icon" type="image/png" href="imagenes/icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,6 +20,7 @@
   <table id="tabla">
     <thead>
       <tr>
+        <th>Orden</th>
         <th>Título</th>
         <th>Contenido</th>
         <th>Área</th>
@@ -32,13 +33,46 @@
   </table>
   
   <script>
-    fetch("apuntes.json")
+     fetch("apuntes.json")
       .then(r => r.json())
       .then(lista => {
         const tbody = document.querySelector("#tabla tbody");
+        
+        // 1. Ordenar primero por área y luego por el campo "orden"
+        lista.sort((a, b) => {
+          // Primero comparar por área
+          if (a.area < b.area) return -1;
+          if (a.area > b.area) return 1;
+          
+          // Si el área es igual, comparar por el campo "orden"
+          // Convertir a número para asegurar orden numérico correcto
+          const ordenA = parseInt(a.orden) || 0;
+          const ordenB = parseInt(b.orden) || 0;
+          
+          return ordenA - ordenB;
+        });
+        
+        let currentArea = null;
+        
+        // 2. Recorrer lista ordenada y agregar separadores de área
         lista.forEach(d => {
+          // Si cambiamos de área, agregar un separador
+          if (d.area !== currentArea) {
+            currentArea = d.area;
+            
+            // Crear fila separadora para el área
+            const separatorRow = document.createElement("tr");
+            separatorRow.className = "area-separator";
+            separatorRow.innerHTML = `
+              <td colspan="7">📁 ${currentArea}</td>
+            `;
+            tbody.appendChild(separatorRow);
+          }
+          
+          // Agregar la fila normal del apunte
           const tr = document.createElement("tr");
           tr.innerHTML = `
+            <td>${d.orden}</td>
             <td>${d.titulo}</td>
             <td><a href="${d.archivo}" target="_blank" rel="noopener">${d.contenido}</a></td>
             <td>${d.area}</td>
@@ -48,7 +82,18 @@
           `;
           tbody.appendChild(tr);
         });
+      })
+      .catch(e => {
+        console.error("Error al cargar los apuntes:", e);
+        const tbody = document.querySelector("#tabla tbody");
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7">Error al cargar los apuntes. Verifica que el archivo apuntes.json exista.</td>
+          </tr>
+        `;
       });
   </script>
 </body>
+
+dfadafdafadcdaihcsaiuhcsuhcaisuh
 </html>

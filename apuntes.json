@@ -1,7 +1,8 @@
 [
   {
     "titulo": "Proposiciones Logicas",
-    "contenido": "Ver PDF",
+    "orden": 1,
+    "contenido": "Capítulo 1 de curso escolar",
     "archivo": "apuntes/1_Proposiciones_Logicas.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
@@ -10,7 +11,8 @@
   },
   {
     "titulo": "Naturales",
-    "contenido": "Ver PDF",
+    "orden": 3,
+    "contenido": "Capítulo 3 de curso escolar",
     "archivo": "apuntes/3_Naturales.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
@@ -18,17 +20,9 @@
     "estado": "40%"
   },
   {
-    "titulo": "Enteros",
-    "contenido": "Ver PDF",
-    "archivo": "apuntes/4_Enteros.pdf",
-    "fecha": "2025-11-19",
-    "area": "Cursos Básicos",
-    "nivel": "Colegio",
-    "estado": "20%"
-  },
-  {
     "titulo": "Polinomios",
-    "contenido": "Ver PDF",
+    "orden": 6,
+    "contenido": "Capítulo 6 de curso escolar",
     "archivo": "apuntes/6_Polinomios.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
@@ -37,7 +31,8 @@
   },
   {
     "titulo": "Geometria Plana",
-    "contenido": "Ver PDF",
+    "orden": 13,
+    "contenido": "Capítulo 13 de curso escolar",
     "archivo": "apuntes/13_Geometria_Plana.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
@@ -46,7 +41,8 @@
   },
   {
     "titulo": "Geometría Analítica",
-    "contenido": "Ver PDF",
+    "orden": 14,
+    "contenido": "Capítulo 14 de curso escolar",
     "archivo": "apuntes/14_Geometria_Analitica.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
@@ -55,18 +51,72 @@
   },
   {
     "titulo": "Numeros Complejos",
-    "contenido": "Ver PDF",
+    "orden": 15,
+    "contenido": "Capítulo 15 de curso escolar",
     "archivo": "apuntes/15_Numeros_Complejos.pdf",
     "fecha": "2025-11-19",
     "area": "Cursos Básicos",
     "nivel": "Colegio",
     "estado": "20%"
   },
-  { "archivo": "apuntes/Preliminar.pdf", 
-    "titulo": "Preliminar de Tesis", 
-    "contenido": "Inestabilidad Estructural", 
-    "fecha": "18-11-2025", 
+  {
+    "archivo": "apuntes/Preliminar.pdf",
+    "orden": 2,
+    "titulo": "Topología C^k",
+    "contenido": "Capítulo 1 de Preliminares de Tesis",
+    "fecha": "18-11-2025",
     "area": "Ecuaciones Diferenciales",
     "nivel": "Pregrado",
-    "estado": "80%"} 
+    "estado": "80%"
+  },
+  {
+    "titulo": "Enteros",
+    "orden": 7,
+    "contenido": "Capítulo 7 de curso escolar",
+    "archivo": "apuntes/4_Enteros.pdf",
+    "fecha": "2025-11-19",
+    "area": "Cursos Básicos",
+    "nivel": "Colegio",
+    "estado": "20%"
+  },
+  {
+    "titulo": "Formas Multilineales y Tensores",
+    "orden": 1,
+    "contenido": "Breve Resúmen de Formas Multilineales y Tensores",
+    "archivo": "apuntes/",
+    "fecha": "2026-10-01",
+    "area": "Álgebra",
+    "nivel": "Pregrado",
+    "estado": "20%"
+  },
+  {
+    "titulo": "Forma Normal",
+    "orden": 3,
+    "contenido": "Capítulo 2 de Preliminares de Tesis",
+    "archivo": "apuntes/Preliminar.pdf",
+    "fecha": "2026-10-01",
+    "area": "Ecuaciones Diferenciales",
+    "nivel": "Pregrado",
+    "estado": "20%"
+  },
+  {
+    "titulo": "Tópicos secundarios sobre Derivación",
+    "orden": 1,
+    "contenido": "Capítulo 0 de Preliminares de Tesis",
+    "archivo": "apuntes/Preliminar.pdf",
+    "fecha": "2026-10-01",
+    "area": "Análisis",
+    "nivel": "Pregrado",
+    "estado": "20%"
+  },
+  {
+    "titulo": "0",
+    "orden": 7,
+    "contenido": "0",
+    "archivo": "apuntes/",
+    "fecha": "2003-08-21",
+    "area": "Placeholder",
+    "nivel": "Doctorado",
+    "estado": "0%"
+  }
 ]

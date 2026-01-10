@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sobre mí — Lenin Trinidad</title>
-  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="icon" type="image/png" href="imagenes/icon.png">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,7 +12,7 @@
     <h1>Lenin Trinidad</h1>
     <nav>
       <a href="index.html">Inicio</a>
-      <a href="sobre.html">Sobre Mí</a>
+      <a href="sobre.html" class="active">Sobre Mí</a>
       <a href="proyectos.html">Proyectos</a>
       <a href="blog.html">Blog</a>
       <a href="apuntes.html">Apuntes</a>
@@ -20,44 +20,63 @@
   </header>
 
   <main class="container">
-    <section class="sobre-mi">
-      <div class="texto">
+    <!-- Cambiamos la clase a "sobre-contenedor" para evitar conflictos -->
+    <section class="sobre-contenedor">
+      <div class="sobre-texto">
         <h2>Sobre mí</h2>
-          <p>Soy estudiante del pregrado de Matemática en la Universidad Nacional Mayor de San Marcos, 
-            interesado en análisis, álgebra y sistemas dinámicos. 
-            Me apasiona explorar temas complejos con rigor y claridad; por eso escribo apuntes para estudiantes y doy pequeñas charlas y guías didácticas.
-          </p>
-    
-          <h3>Experiencia</h3>
-          <ul>
-            <li>Asistente de docencia — sesiones de tutoría en álgebra y análisis.</li>
-            <li>Profesor de la academia Trinotrix.</li>
-          </ul>
+        <p>Soy estudiante del pregrado de Matemática en la Universidad Nacional Mayor de San Marcos, 
+          interesado en análisis, álgebra y sistemas dinámicos. 
+          Me apasiona explorar temas complejos con rigor y claridad; por eso escribo apuntes para estudiantes y doy pequeñas charlas y guías didácticas.
+        </p>
+
+        <h3>Experiencia</h3>
+        <ul>
+          <li><strong>Asistente de docencia</strong> — sesiones de tutoría en álgebra y análisis.</li>
+          <li><strong>Profesor</strong> de la academia Trinotrix.</li>
+          <li><strong>Investigación independiente</strong> en sistemas dinámicos y análisis funcional.</li>
+        </ul>
+
+        <h3>Intereses académicos</h3>
+        <ul>
+          <li>Análisis funcional y ecuaciones diferenciales</li>
+          <li>Álgebra abstracta y teoría de grupos</li>
+          <li>Sistemas dinámicos y teoría del caos</li>
+          <li>Matemática aplicada a ciencias de la computación</li>
+        </ul>
       </div>
-      <div class="contacto">
+      
+      <div class="sobre-contacto">
         <h3>Contacto</h3>
-        <p><strong>Teléfono:</strong> +51 951453715</p>
-      
-        <p><strong>Correo:</strong><br>
-          <a href="mailto:lenin.yasel@gmail.com">lenin.yasel@gmail.com</a><br>
-          <a href="mailto:lenin.trinidad@unmsm.edu.pe">lenin.trinidad@unmsm.edu.pe</a><br>
-          <a href="mailto:lenin.trinidad.f@uni.pe">lenin.trinidad.f@uni.pe</a>
-        </p>
-      
-        <p><strong>Página personal:</strong><br>
-          <a href="https://leninyasseltrinidadf.github.io/Lenin_Trinidad" target="_blank">
-            https://leninyasseltrinidadf.github.io/Lenin_Trinidad
-          </a>
-        </p>
+        <div class="info-card">
+          <p><strong>Teléfono:</strong><br>
+            <a href="tel:+51951453715">+51 951 453 715</a>
+          </p>
+          
+          <p><strong>Correo electrónico:</strong><br>
+            <a href="mailto:lenin.yasel@gmail.com">lenin.yasel@gmail.com</a><br>
+            <a href="mailto:lenin.trinidad@unmsm.edu.pe">lenin.trinidad@unmsm.edu.pe</a><br>
+            <a href="mailto:lenin.trinidad.f@uni.pe">lenin.trinidad.f@uni.pe</a>
+          </p>
+          
+          <p><strong>Página personal:</strong><br>
+            <a href="https://leninyasseltrinidadf.github.io/Lenin_Trinidad" target="_blank" rel="noopener">
+              https://leninyasseltrinidadf.github.io/Lenin_Trinidad
+            </a>
+          </p>
+          
+          <p><strong>GitHub:</strong><br>
+            <a href="https://github.com/leninyasseltrinidadf" target="_blank" rel="noopener">
+              github.com/leninyasseltrinidadf
+            </a>
+          </p>
+        </div>
       </div>
       
-      <div class="imagen">
-        <img src="Lenin_Trinidad.jpg">
+      <div class="sobre-imagen">
+        <img src="imagenes/Lenin_Trinidad.jpg" alt="Foto de Lenin Trinidad">
+        <p class="pie-foto">Estudiante de Matemática - UNMSM</p>
       </div>
     </section>
-
-    <section>
-          </section>
   </main>
 
   <script defer src="script.js"></script>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Proyectos — Lenin Trinidad</title>
-  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="icon" type="image/png" href="imagenes/icon.png">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -13,7 +13,7 @@
     <nav>
       <a href="index.html">Inicio</a>
       <a href="sobre.html">Sobre Mí</a>
-      <a href="proyectos.html">Proyectos</a>
+      <a href="proyectos.html" class="active">Proyectos</a>
       <a href="blog.html">Blog</a>
       <a href="apuntes.html">Apuntes</a>
     </nav>
@@ -21,26 +21,62 @@
 
   <main class="container">
     <h2>Proyectos</h2>
+    
+    <p style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-bottom: var(--espacio-xl);">
+      Aquí encontrarás una colección de mis trabajos personales, investigaciones y desarrollos.
+    </p>
 
     <article class="project">
-      <h3>Apuntes de Cursos Básicos</h3>
-      <p>Colección de PDFs ordenados por área (Análisis, Álgebra, Geometría). Accede a la biblioteca para ver o descargar.</p>
-      <p><a class="btn" href="apuntes.html">Ir a la biblioteca</a></p>
+      <h3>Apuntes de Cursos Básicos <span class="project-status status-completed">Completado</span></h3>
+      <p>Colección completa de PDFs organizados por área matemática (Análisis, Álgebra, Geometría). 
+         Material didáctico desarrollado para facilitar el aprendizaje de conceptos fundamentales.</p>
+      <div class="project-tags">
+        <span class="project-tag">Matemáticas</span>
+        <span class="project-tag">Educación</span>
+        <span class="project-tag">PDF</span>
+      </div>
+      <p><a class="btn" href="apuntes.html">Explorar Biblioteca</a></p>
     </article>
 
     <article class="project">
-      <h3>Preliminar de Tesis: Inestabilidad Estructural</h3>
-      <p>Documento inicial sobre bifurcaciones y estabilidad estructural (preliminar).</p>
-      <p><a class="btn" href="apuntes/Preliminar.pdf" target="_blank" rel="noopener">Leer preliminar</a></p>
+      <h3>Preliminar de Tesis: Inestabilidad Estructural <span class="project-status status-draft">Borrador</span></h3>
+      <p>Documento preliminar sobre bifurcaciones y estabilidad estructural en sistemas dinámicos. 
+         Análisis teórico inicial que servirá como base para investigación futura.</p>
+      <div class="project-tags">
+        <span class="project-tag">Análisis</span>
+        <span class="project-tag">Sistemas Dinámicos</span>
+        <span class="project-tag">Investigación</span>
+      </div>
+      <p><a class="btn" href="apuntes/Preliminar.pdf" target="_blank" rel="noopener">Leer Preliminar (PDF)</a></p>
     </article>
 
     <article class="project">
-      <h3>Intereses Musicales</h3>
-      <p>Piezas musicales pequeñas</p>
-      <p><a class="btn" href="https://musescore.com/user/58392526" target="_blank" rel="noopener">Enlace de Musescore</a></p>
+      <h3>Intereses Musicales <span class="project-status status-active">En desarrollo</span></h3>
+      <p>Composiciones musicales pequeñas y arreglos personales. Exploración de la relación entre 
+         estructuras matemáticas y patrones musicales.</p>
+      <div class="project-tags">
+        <span class="project-tag">Música</span>
+        <span class="project-tag">Composición</span>
+        <span class="project-tag">Creatividad</span>
+      </div>
+      <p><a class="btn" href="https://musescore.com/user/58392526" target="_blank" rel="noopener">
+        <span>Visitar Musescore</span>
+      </a></p>
+    </article>
+    
+    <!-- Proyecto adicional de ejemplo -->
+    <article class="project">
+      <h3>Sitio Web Personal <span class="project-status status-completed">Completado</span></h3>
+      <p>Desarrollo y diseño de este sitio web personal como plataforma para compartir conocimiento 
+         matemático y conectar con la comunidad académica.</p>
+      <div class="project-tags">
+        <span class="project-tag">Web Development</span>
+        <span class="project-tag">Diseño</span>
+        <span class="project-tag">HTML/CSS</span>
+      </div>
+      <p><a class="btn" href="index.html">Visitar Inicio</a></p>
     </article>
   </main>
-
 
   <script defer src="script.js"></script>
 </body>
