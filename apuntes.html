@@ -22,20 +22,33 @@
     </div>
   </header>
     
-  <table id="tabla">
-    <thead>
-      <tr>
-        <th>Orden</th>
-        <th>Título</th>
-        <th>Contenido</th>
-        <th>Área</th>
-        <th>Nivel</th>
-        <th>Estado</th>
-        <th>Fecha</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <main class="container">
+      <h2>Proyectos</h2>
+
+        <p style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-bottom: var(--espacio-xl);">
+            Aquí encontrarás una lista de apuntes personales 
+        </p>
+
+        <table id="tabla">
+          <thead>
+            <tr>
+              <th>Orden</th>
+              <th>Título</th>
+              <th>Contenido</th>
+              <th>Área</th>
+              <th>Nivel</th>
+              <th>Estado</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se llenarán dinámicamente con JavaScript -->
+          </tbody>
+        </table>
+  </main>
+
+
+  
   
   <script>
      fetch("apuntes.json")
@@ -100,5 +113,4 @@
   </script>
 </body>
 
-dfadafdafadcdaihcsaiuhcsuhcaisuh
 </html>

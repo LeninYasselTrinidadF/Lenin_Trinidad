@@ -504,31 +504,33 @@ nav a:hover::after {
 
 /* TABLAS */
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     padding: 20px;
     font-family: sans-serif;
     color: #000;
-    margin: var(--espacio-lg) 0;
+    margin: var(--espacio-lg) auto;
     z-index: 0;
 }
 
 table thead {
     position: sticky;
-    top: 0; /* Ajusta según tu header global (tu top:80px podría ser correcto) */
+    top: 80px; /* Ajusta según tu header global (tu top:80px podría ser correcto) */
     z-index: 100; /* Valor alto para prioridad */
+    background: transparent;
 }
+
 
 table thead th {
     background: linear-gradient(135deg, var(--gris-medio), #e0e0e0);
-    padding: var(--espacio-md);
     border: 2px solid var(--gris-oscuro);
     border-bottom: 3px solid var(--m2);
+    padding: var(--espacio-md);
     text-align: left;
     font-weight: 700;
     color: var(--negro);
     font-size: 1.1rem;
-    top: 0px;
+    top: 0;
     position: relative;
     z-index: 101;
 }
@@ -556,6 +558,22 @@ table tbody tr td:first-child {
 
 table tbody tr td:last-child {
     border-right: none;
+}
+
+tr:first-child th:first-child {
+  border-top-left-radius: 15px;
+}
+
+tr:first-child th:last-child {
+  border-top-right-radius: 15px;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
 }
 
 /* Efectos hover en tablas */
