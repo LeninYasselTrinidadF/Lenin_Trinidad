@@ -51,30 +51,36 @@ header {
     border-bottom: 2px solid rgba(171, 73, 204, 0.3);
     box-shadow: var(--sombra);
     transition: all 0.3s ease;
-    height: 70px; /* Altura fija para el header */
+    height: 80px; /* Altura consistente */
+    display: flex;
+    align-items: center;
 }
 
-/* Añadir margen superior al cuerpo para evitar que el header cubra el contenido */
+
+/* EN SU LUGAR, usa esto: */
 body {
-    margin-top: 70px; /* Debe coincidir con la altura del header */
-    transition: margin-top 0.3s ease;
+    padding-top: 80px !important; /* Usa padding en lugar de margin */
+    transition: padding-top 0.3s ease;
 }
 
-/* Efecto al hacer scroll */
 header.scrolled {
+    height: 60px;
     background: linear-gradient(135deg, rgba(58, 0, 102, 0.98), rgba(113, 0, 178, 0.98));
     backdrop-filter: blur(15px);
     border-bottom-color: var(--m3);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    height: 60px; /* Se reduce un poco al hacer scroll */
 }
 
-/* Ajustar el margen del body cuando el header tiene clase .scrolled */
 body.header-scrolled {
-    margin-top: 60px; /* Debe coincidir con la altura reducida del header */
+    padding-top: 60px !important;
 }
+
+
+
 
 /* Contenedor del header */
+
+/* ===== NAVEGACIÓN DENTRO DEL HEADER ===== */
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -82,7 +88,22 @@ body.header-scrolled {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%; /* Ocupa toda la altura del header */
+    width: 100%;
+    height: 100%;
+}
+
+/* Mueve el nav dentro del header-container */
+.header-container nav {
+    background: transparent !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--espacio-lg);
+    padding: 0 !important;
+    border-bottom: none !important;
+    position: static !important;
+    top: auto !important;
+    box-shadow: none !important;
+    margin: 0;
 }
 
 /* Título principal en el header */
@@ -104,6 +125,46 @@ h1 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1;
+}
+
+.header-title h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--blanco);
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--blanco), var(--a2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.header-title h1::before {
+    content: '🧮';
+    margin-right: 10px;
+    font-size: 1.6rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header-title h1::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--m3), var(--a1));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.header-title h1:hover::after {
+    width: 90px;
 }
 
 h1::before {
@@ -132,25 +193,9 @@ h1:hover::after {
 
 /* NAVEGACIÓN */
 /* Ajustar el top del nav para que se mantenga debajo del header */
-nav {
-    background: linear-gradient(135deg, var(--m1), var(--m2));
-    display: flex;
-    justify-content: center;
-    gap: var(--espacio-xl);
-    padding: var(--espacio-md) 0;
-    border-bottom: 3px solid var(--m3);
-    position: sticky;
-    top: 70px; /* Debe coincidir con la altura del header */
-    z-index: 100;
-    box-shadow: var(--sombra);
-    transition: top 0.3s ease;
-}
 
-/* Ajustar el top del nav cuando el header tiene clase .scrolled */
-header.scrolled + * nav,
-body.header-scrolled nav {
-    top: 150px; /* Debe coincidir con la altura reducida del header */
-}
+
+
 
 nav a {
     color: var(--blanco);
@@ -182,6 +227,48 @@ nav a::after {
 
 nav a:hover::after {
     width: 80%;
+}
+
+.header-container nav a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: var(--radio-borde);
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+}
+
+.header-container nav a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.header-container nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--a2);
+    transition: width 0.3s ease;
+}
+
+.header-container nav a:hover::after {
+    width: 70%;
+}
+
+.header-container nav a.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--a2);
+}
+
+.header-container nav a.active::after {
+    width: 70%;
 }
 
 /* ===== CONTENEDORES Y LAYOUT ===== */
@@ -423,6 +510,13 @@ table {
     font-family: sans-serif;
     color: #000;
     margin: var(--espacio-lg) 0;
+    z-index: 0;
+}
+
+table thead {
+    position: sticky;
+    top: 0; /* Ajusta según tu header global (tu top:80px podría ser correcto) */
+    z-index: 100; /* Valor alto para prioridad */
 }
 
 table thead th {
@@ -434,8 +528,9 @@ table thead th {
     font-weight: 700;
     color: var(--negro);
     font-size: 1.1rem;
-    position: sticky;
-    top: 80px;
+    top: 0px;
+    position: relative;
+    z-index: 101;
 }
 
 table tbody tr {
@@ -456,6 +551,7 @@ table tbody tr td {
 table tbody tr td:first-child {
     border-left: 3px solid transparent;
     transition: border-left-color 0.3s ease;
+    z-index: 10;
 }
 
 table tbody tr td:last-child {
@@ -477,6 +573,7 @@ table tbody tr:hover {
 
 table tbody tr:hover td:first-child {
     border-left-color: var(--m2);
+    z-index: 10;
 }
 
 table tbody tr:hover td {
@@ -771,55 +868,61 @@ table tbody tr:hover td {
 }
 
 @media (max-width: 768px) {
-    .sobre-contenedor {
-        padding: var(--espacio-lg) 0;
-        gap: var(--espacio-md);
+    header {
+        height: auto;
+        min-height: 70px;
+        padding: 10px 0;
     }
     
-    .sobre-texto,
-    .sobre-contacto {
-        padding: var(--espacio-lg);
+    body {
+        padding-top: 120px !important; /* Más espacio en móvil */
     }
     
-    .sobre-texto h2 {
-        font-size: 2rem;
+    .header-container {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px var(--espacio-md);
     }
     
-    .sobre-texto h3,
-    .sobre-contacto h3 {
+    .header-title h1 {
         font-size: 1.5rem;
+        text-align: center;
     }
     
-    .sobre-imagen img {
-        max-width: 250px;
+    .header-title h1::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .header-container nav {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .header-container nav a {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+    
+    header.scrolled {
+        height: auto;
+        min-height: 60px;
     }
 }
 
 @media (max-width: 480px) {
-    .sobre-contenedor {
-        padding: var(--espacio-md) 0;
+    .header-title h1 {
+        font-size: 1.3rem;
     }
     
-    .sobre-texto,
-    .sobre-contacto {
-        padding: var(--espacio-md);
+    .header-container nav {
+        gap: 8px;
     }
     
-    .sobre-texto h2 {
-        font-size: 1.8rem;
-    }
-    
-    .sobre-texto p,
-    .sobre-contacto p {
-        font-size: 1rem;
-    }
-    
-    .sobre-imagen img {
-        max-width: 200px;
-    }
-    
-    .sobre-contacto a[href^="mailto:"] {
+    .header-container nav a {
         font-size: 0.9rem;
+        padding: 5px 10px;
     }
 }
 
