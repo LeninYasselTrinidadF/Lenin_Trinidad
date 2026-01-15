@@ -475,47 +475,43 @@ nav a:hover::after {
 
 /* Esto GANARÁ sobre el user agent */
 /* ===== RESET MULTI-NAVEGADOR PARA BOTONES ===== */
-.filter-btn {
-  /* Reset completo para todos los navegadores */
-  all: unset;
-  box-sizing: border-box;
+/* ===== SOLUCIÓN DE EMERGENCIA ===== */
+#highlights .card button.filter-btn,
+#highlights a.card button.filter-btn {
+  /* RESET COMPLETO */
+  all: unset !important;
+  box-sizing: border-box !important;
   
-  /* Prefijos para diferentes navegadores */
-  -webkit-appearance: none; /* Chrome, Safari, Opera */
-  -moz-appearance: none;    /* Firefox */
-  -o-appearance: none;      /* Opera antigua */
-  appearance: none;         /* Estándar moderno */
+  /* Override de estilos de navegador */
+  -webkit-appearance: none !important;
+  appearance: none !important;
   
-  /* Reset específico de márgenes/paddings */
-  margin: 0;
-  padding: 0;
+  /* ESTILOS VISIBLES INMEDIATOS */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
   
-  /* Forzar fuentes y colores */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--a2);
-  
-  /* Override de estilos específicos de Opera */
-  background-color: transparent !important;
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e) !important;
+  color: white !important;
+  padding: 12px 24px !important;
+  border-radius: 8px !important;
   border: none !important;
-  
-  /* Aplicar tus estilos DESPUÉS del reset */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: rgba(30, 145, 237, 0.05);
-  padding: 10px 20px;
-  border-radius: var(--radio-borde);
-  border: 2px solid rgba(129, 199, 255, 0.3) !important;
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 15px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  margin-top: 15px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3) !important;
+}
+
+#highlights .card button.filter-btn:hover,
+#highlights a.card button.filter-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4) !important;
 }
 
 #highlights .card .filter-btn,
