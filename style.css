@@ -469,6 +469,180 @@ nav a:hover::after {
     transform: translateX(5px);
 }
 
+
+
+/* ===== ESTILOS PARA BOTONES DE FILTRO ===== */
+
+/* Esto GANARÁ sobre el user agent */
+/* ===== RESET MULTI-NAVEGADOR PARA BOTONES ===== */
+.filter-btn {
+  /* Reset completo para todos los navegadores */
+  all: unset;
+  box-sizing: border-box;
+  
+  /* Prefijos para diferentes navegadores */
+  -webkit-appearance: none; /* Chrome, Safari, Opera */
+  -moz-appearance: none;    /* Firefox */
+  -o-appearance: none;      /* Opera antigua */
+  appearance: none;         /* Estándar moderno */
+  
+  /* Reset específico de márgenes/paddings */
+  margin: 0;
+  padding: 0;
+  
+  /* Forzar fuentes y colores */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--a2);
+  
+  /* Override de estilos específicos de Opera */
+  background-color: transparent !important;
+  border: none !important;
+  
+  /* Aplicar tus estilos DESPUÉS del reset */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(30, 145, 237, 0.05);
+  padding: 10px 20px;
+  border-radius: var(--radio-borde);
+  border: 2px solid rgba(129, 199, 255, 0.3) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 15px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#highlights .card .filter-btn,
+#highlights a.card .filter-btn {
+  /* Reset completo */
+  all: unset;
+  box-sizing: border-box;
+  -o-appearance: none; /* Prefijo específico de Opera */
+  
+  /* Estilos base inspirados en card-link */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(30, 145, 237, 0.05);
+  color: var(--a2);
+  padding: 10px 20px;
+  border-radius: var(--radio-borde);
+  border: 2px solid rgba(129, 199, 255, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto; /* Para que se alinee al fondo de la card */
+  
+  /* Override específico de estilos de navegador */
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent !important;
+  border-style: solid !important;
+  border-width: 2px !important;
+  margin: 0 !important;
+  padding-block: 10px !important;
+  padding-inline: 20px !important;
+}
+
+/* Estados hover */
+#highlights .card .filter-btn:hover,
+#highlights a.card .filter-btn:hover {
+  background: rgba(30, 145, 237, 0.15) !important;
+  color: var(--a1);
+  border-color: var(--a2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(30, 145, 237, 0.2);
+  gap: 12px;
+}
+
+/* Flecha */
+#highlights .card .filter-btn::after,
+#highlights a.card .filter-btn::after {
+  content: '→';
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+}
+
+#highlights .card .filter-btn:hover::after,
+#highlights a.card .filter-btn:hover::after {
+  transform: translateX(5px);
+  opacity: 1;
+}/* Esto GANARÁ sobre el user agent */
+#highlights .card .filter-btn,
+#highlights a.card .filter-btn {
+  /* Reset completo */
+  all: unset;
+  box-sizing: border-box;
+  
+  /* Estilos base inspirados en card-link */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(30, 145, 237, 0.05);
+  color: var(--a2);
+  padding: 10px 20px;
+  border-radius: var(--radio-borde);
+  border: 2px solid rgba(129, 199, 255, 0.3);
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: auto; /* Para que se alinee al fondo de la card */
+  
+  /* Override específico de estilos de navegador */
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent !important;
+  border-style: solid !important;
+  border-width: 2px !important;
+  margin: 0 !important;
+  padding-block: 10px !important;
+  padding-inline: 20px !important;
+}
+
+/* Estados hover */
+#highlights .card .filter-btn:hover,
+#highlights a.card .filter-btn:hover {
+  background: rgba(30, 145, 237, 0.15) !important;
+  color: var(--a1);
+  border-color: var(--a2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(30, 145, 237, 0.2);
+  gap: 12px;
+}
+
+/* Flecha */
+#highlights .card .filter-btn::after,
+#highlights a.card .filter-btn::after {
+  content: '→';
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  opacity: 0.8;
+}
+
+#highlights .card .filter-btn:hover::after,
+#highlights a.card .filter-btn:hover::after {
+  transform: translateX(5px);
+  opacity: 1;
+}
+
+
+
+
 /* SECCIÓN SOBRE MÍ */
 .sobre-mi {
     display: flex;

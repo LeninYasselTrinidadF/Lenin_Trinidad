@@ -23,11 +23,59 @@
   </header>
     
   <main class="container">
-      <h2>Proyectos</h2>
+      <h2>Apuntes</h2>
 
         <p style="text-align: center; color: rgba(255, 255, 255, 0.8); margin-bottom: var(--espacio-xl);">
-            Aquí encontrarás una lista de apuntes personales 
+            Aquí encontrarás una lista de apuntes personales. Puedes elegir el área de tu interés y explorar los documentos disponibles o elegir directamente de la tabla. 
+            Para filtrar los apuntes, utiliza los botones debajo de los destacados o la tabla interactiva. Para reiniciar los filtros, simplemente recarga la página o presiona 
+            el botón del último apartado destacado.
         </p>
+      
+      <section id="highlights">
+      <div  class="card">
+        <h3>Apuntes de Colegio <span class="project-status status-active">En desarrollo 2/40</span></h3>
+        <p>Apuntes organizados de un curso desarrollado en 40 sesiones cubriendo el material concerniente a la etapa pre-universitaria. El enfoque del curso es teórico,
+          construyendo la teoría desde teoría de conjuntos hasta la exposición de la identidad Euler, de modo tal que se comprendan los 4 cursos básicos de la currícula pre-universitaria:
+          Aritmética, Álgebra, Geometría y Trigonometría. Se recomienda omitir las demostraciones y centrarse en los ejemplos y en la intuición geométrica y analítica de los conceptos básicos. 
+        </p>
+        <button data-filtro="Curso_Colegio" class = "filter-btn">Filtrar Apuntes</button>
+      </div>
+
+      <div class="card">
+        <h3>Preliminares de Tesis <span class="project-status status-active">En desarrollo 3/7</span></h3>
+        <p>Apuntes organizados de los temas relacionados con la tesis de pregrado sobre bifurcaciones de campos vectoriales parametrizados. 
+          Se cubren temas de análisis real, ecuaciones diferenciales ordinarias y teoría cualitativa de sistemas dinámicos. 
+          El objetivo es construir una base sólida para la lectura formal de la tesis presentada en el proyecto de grado.
+        </p>
+        <button data-filtro="Preliminares_Tesis" class = "filter-btn">Filtrar Apuntes</button>
+      </div>
+
+
+      <div class="card">
+        <h3>Apuntes Complementarios <span class="project-status status-active">En desarrollo 2/???</span></h3>
+        <p>Apuntes organizados de los temas relacionados con tópicos adicionales no desarrollados en los cursos formales, pero que complementan la formación matemática. 
+          Dentro de los temas de interés se encuentran la teoría de semigrupos y el análisis funcional.
+        </p>
+        <button data-filtro="Apuntes_Complementarios" class = "filter-btn">Filtrar Apuntes</button>
+      </div>
+
+      <div class="card">
+        <h3>Apuntes de Ingeniería <span class="project-status status-active">En desarrollo</span></h3>
+        <p>Apuntes organizados de los temas relacionados con cursos de física e ingeniería
+        </p>
+        <button data-filtro="Apuntes_Ingeniería" class = "filter-btn">Filtrar Apuntes</button>
+      </div>
+
+
+      <div class="card">
+        <h3>Todos los apuntes <span class="project-status status-active">En desarrollo 2/???</span></h3>
+        <p>Presiona el botón para reiniciar todos los filtros y ver la lista completa de apuntes disponibles.
+        </p>
+        <button data-filtro="todos" class = "filter-btn">Reiniciar Filtro</button>
+      </div>
+
+    </section>
+        
 
         <table id="tabla">
           <thead>
@@ -49,68 +97,7 @@
 
 
   
-  
-  <script>
-     fetch("apuntes.json")
-      .then(r => r.json())
-      .then(lista => {
-        const tbody = document.querySelector("#tabla tbody");
-        
-        // 1. Ordenar primero por área y luego por el campo "orden"
-        lista.sort((a, b) => {
-          // Primero comparar por área
-          if (a.area < b.area) return -1;
-          if (a.area > b.area) return 1;
-          
-          // Si el área es igual, comparar por el campo "orden"
-          // Convertir a número para asegurar orden numérico correcto
-          const ordenA = parseInt(a.orden) || 0;
-          const ordenB = parseInt(b.orden) || 0;
-          
-          return ordenA - ordenB;
-        });
-        
-        let currentArea = null;
-        
-        // 2. Recorrer lista ordenada y agregar separadores de área
-        lista.forEach(d => {
-          // Si cambiamos de área, agregar un separador
-          if (d.area !== currentArea) {
-            currentArea = d.area;
-            
-            // Crear fila separadora para el área
-            const separatorRow = document.createElement("tr");
-            separatorRow.className = "area-separator";
-            separatorRow.innerHTML = `
-              <td colspan="7">📁 ${currentArea}</td>
-            `;
-            tbody.appendChild(separatorRow);
-          }
-          
-          // Agregar la fila normal del apunte
-          const tr = document.createElement("tr");
-          tr.innerHTML = `
-            <td>${d.orden}</td>
-            <td>${d.titulo}</td>
-            <td><a href="${d.archivo}" target="_blank" rel="noopener">${d.contenido}</a></td>
-            <td>${d.area}</td>
-            <td>${d.nivel}</td>
-            <td>${d.estado}</td>
-            <td>${d.fecha}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-      })
-      .catch(e => {
-        console.error("Error al cargar los apuntes:", e);
-        const tbody = document.querySelector("#tabla tbody");
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="7">Error al cargar los apuntes. Verifica que el archivo apuntes.json exista.</td>
-          </tr>
-        `;
-      });
-  </script>
+  <script src="apuntes.js" defer></script>
 </body>
 
 </html>
