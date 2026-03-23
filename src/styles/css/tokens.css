@@ -1,0 +1,89 @@
+/* ═══════════════════════════════════════
+   TOKENS — Variables, reset y base
+   ═══════════════════════════════════════ */
+
+:root {
+    /* Paleta */
+    --m1: #3a0066;
+    --m2: #7100b2;
+    --m3: #ab49cc;
+    --a1: #1e91ed;
+    --a2: #81c7ff;
+    --blanco: #ffffff;
+    --negro: #000000;
+    --gris-claro: #f2f2f2;
+    --gris-medio: #d9d9d9;
+    --gris-oscuro: #444444;
+
+    /* Espaciados */
+    --espacio-xs: 5px;
+    --espacio-sm: 10px;
+    --espacio-md: 20px;
+    --espacio-lg: 30px;
+    --espacio-xl: 40px;
+
+    /* Bordes y sombras */
+    --radio-borde: 8px;
+    --sombra: 0 4px 12px rgba(0,0,0,0.3);
+    --sombra-fuerte: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── Base ── */
+body {
+    background: var(--negro);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--blanco);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-top: 80px;
+    transition: padding-top 0.3s ease;
+}
+
+body.header-scrolled {
+    padding-top: 60px;
+}
+
+/* ── Tipografía global ── */
+h2 {
+    font-size: 2rem;
+    color: var(--a2);
+    margin-bottom: var(--espacio-lg);
+    padding-left: var(--espacio-md);
+    background: linear-gradient(90deg, var(--a2), var(--m3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--m1); }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--m2), var(--a1));
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(var(--m3), var(--a2));
+}
+
+/* ── Accesibilidad ── */
+:focus-visible {
+    outline: 2px solid var(--a1);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

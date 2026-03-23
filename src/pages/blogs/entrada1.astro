@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Sobre la Organización de la Matemática" page="blog">
+  <article class="project">
+    <h3>Sobre la organización de la Matemática</h3>
+    <p class="project-status status-completed" style="display:inline-block; margin-bottom: 1.5rem;">19-11-2025</p>
+
+    <p>
+      Una de las mayores dificultades del tránsito de cualquier etapa del aprendizaje parece ser
+      la ubicación de contenido semejante. En efecto, inclusive con herramientas tan sofisticadas como
+      lo son la inteligencia artificial y los buscadores de los que se dispone sigue siendo tan difícil,
+      si no más, el obtener información que esté al alcance de lo que uno busca.
+    </p>
+    <p>
+      Si uno conoce lo suficiente del tema como para responder lo que necesita, entonces buscar información
+      es una tarea más bien inútil, pero si uno no conoce, la tarea resulta, aunque menos inútil, no por ello,
+      menos tediosa.
+    </p>
+    <p>
+      Coloquemos por ejemplo el caso del estudio de sistemas dinámicos. Una fuente respetada a nivel académico es
+      el texto de Lawrence Perko: <em>Differential Equations and Dynamical Systems</em>. Este texto, más que ser una compilación
+      de demostraciones sobre Teoremas útiles y fundamentales que todo estudiante debería conocer, al modo de los textos
+      de la trilogía de Rudin, el excelso volumen de Hoffman-Kunze o las referencias de John M. Lee y Serge Lang, son una
+      guía de estudio sobre dichos teoremas y una explicación de los resultados de forma geométrica. A medida que se progresa
+      en éste, las demostraciones se vuelven más esbozos y los Teoremas referencian a un sinfín de artículos y libros, muchos
+      de los cuales son, por cierto, también guías de estudio.
+    </p>
+    <p>
+      Tanta ha llegado a ser la aversión a la escuela de Bourbaki, a las demostraciones rígidas, analíticas, expresadas en cadenas
+      de fórmulas y proposiciones anidadas una detrás de otra que se llega al efecto contrario, a saber, que no haya fuentes unificadas
+      de los temas principales. Este defecto, presente en toda área de las ciencias matemáticas, debido en primera, a su multiplicidad,
+      y en segunda, a su complejidad y a la dificultad de su formalización, ha llevado a múltiples errores y redundancias en material.
+    </p>
+    <p>
+      La propuesta más reciente de parte del equipo de Lean4 parece ser la versión moderna del proyecto de Euclides, Russell y Bourbaki.
+    </p>
+    <p>
+      A esta propuesta, se le contrapone el hecho de que la matemática, al tener esta dimensión geométrica, artística, estructural,
+      adquiere múltiples capas. No es lo mismo estudiar una función "suave" en el sentido de no tener picos, como lo es en el contexto visual
+      de funciones reales de variable real tratado en la escuela, o "suave" como función analítica — la cual nos permite la
+      manipulación de límites de forma excesiva, debido a ser generalización de un polinomio, sin considerar los casos patológicos —
+      o que la función sea "suave" en el sentido de aquella que es suave en coordenadas locales, esto es, de clase <span class="math-inline">\(C^\infty\)</span>
+      en el sentido de variedades diferenciables.
+    </p>
+    <p>
+      En todos estos casos, la definición más general parece ser la que presenta mayor ventaja. Siempre es posible volver a la versión concreta
+      haciendo uso del análisis del caso concreto. Sin embargo, aquí también surge el problema de la pérdida del sentido de a qué se refiere
+      cuando se toma una generalización sin su caso particular.
+    </p>
+    <p>
+      No son pocas las entradas de páginas de uso común, como lo son Wikipedia y Stack Exchange, que presentan respuestas que
+      no se pueden leer desconectadas de toda la teoría preliminar. Para un ejemplo, basta tomar el siguiente enlace sobre cómo
+      <a href="https://math.stackexchange.com/questions/3599388/completing-incomplete-vector-fields" target="_blank" rel="noopener">completar campos vectoriales</a>,
+      en el cual se hace referencia a otra publicación sobre cómo
+      <a href="https://math.stackexchange.com/questions/378783/completing-a-vector-field-on-a-non-compact-manifold-m" target="_blank" rel="noopener">completar campos vectoriales en una variedad no compacta</a>.
+      Este problema — el de hallar un campo vectorial completo topológicamente equivalente a un campo vectorial dado — es demostrado
+      de forma elemental y se conoce como el <strong>Teorema de Vinograd</strong>, presentado en el texto <em>Qualitative Theory of Differential Equations</em>
+      de V.V. Nemytskii y V.V. Stepanov.
+    </p>
+    <p>
+      Una demostración similar es dada en el capítulo 3 del texto de Perko. El mayor problema es que para un estudiante de pregrado
+      la teoría de Variedades Riemannianas preliminar al Teorema de Hopf-Rinow le es inaccesible, mientras que la demostración del
+      texto de Perko resulta insuficiente por definir la equivalencia topológica únicamente para campos de clase
+      <span class="math-inline">\(C^1(U)\)</span>. Podría reducirse dicha condición aprovechando la definición de equivalencia topológica
+      como en el texto <em>Geometric Theory of Dynamical Systems</em> de Palis y Melo.
+    </p>
+    <p>
+      El mayor problema con esto es que la demostración de Perko no verifica la suavidad de la función distancia, la cual puede
+      probarse que no es suave para algunos conjuntos compactos. Basta tomar
+      <span class="math-inline">\(K \supseteq \&lbrace;(-1,0),(1,0)\&rbrace;\)</span> formado por dos curvas centradas en tales puntos
+      y tomar los valores para pequeñas perturbaciones de <span class="math-inline">\(0\)</span> a la derecha y a la izquierda:
+      las perturbaciones son ambas pequeñas, pero los valores de "suavidad" en cada curva son distintos, con lo cual la existencia
+      de la derivada resulta problemática. El Teorema de Vinograd del texto de Nemytskii es mucho más satisfactorio al limitarse
+      a trabajar sobre campos de solución única, esto es, localmente Lipschitz.
+    </p>
+    <p>
+      El problema de la inaccesibilidad, así como el hecho de que la pregunta se dé naturalmente a nivel de pregrado mientras que
+      la respuesta se ubica fuera de las referencias estándar, es uno de los grandes problemas que futuros proyectos referenciales
+      deben enfrentar.
+    </p>
+    <p>
+      No mencionaremos casos más problemáticos, como el hecho de que a la palabra <em>bifurcación</em> en un mismo contexto y con
+      los mismos ejemplos le correspondan al menos tres definiciones diferentes: la de campo parametrizado
+      <span class="math-inline">\(X_\lambda\)</span> en el cual un parámetro <span class="math-inline">\(\lambda_0\)</span> posee
+      la propiedad de que toda vecindad en su topología cuenta con la existencia de al menos un campo no topológicamente equivalente;
+      la de un punto del cual surgen ramificaciones de soluciones de una ecuación funcional; o la de la existencia de un conjunto
+      invariante que posea conjuntos invariantes cercanos pero disjuntos con cambios en su estabilidad.
+    </p>
+    <p>
+      Tras replantear mi corta experiencia enseñando en tutorías personalizadas y en salones de reforzamiento, he notado cuánta
+      necesidad hay de la estandarización del lenguaje matemático, inclusive en los niveles inferiores. Uno de los mayores problemas
+      de la educación en nivel básico es el de saber lo que no se sabe. La única solución que me parece sensata es ser consistente
+      con uno mismo: ni el docente puede exigir al alumno lo que éste no ha enseñado, ni el alumno puede sentirse completamente
+      desorientado.
+    </p>
+    <p>
+      El defecto es, así como en la organización actual de la matemática, el tiempo finito del que disponemos. Por esto,
+      se pide al visitante su perdón y su paciencia.
+    </p>
+  </article>
+</Layout>
+
+<!-- KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ]
+    });
+  });
+</script>
+
+<style>
+  .math-inline { font-style: normal; }
+  article p { margin-bottom: 1.2rem; line-height: 1.8; }
+  article a { color: var(--a2); }
+  article a:hover { color: var(--m3); }
+</style>
