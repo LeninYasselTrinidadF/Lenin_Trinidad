@@ -3,19 +3,28 @@ import '../styles/global.css';
 
 interface Props {
   title: string;
-  page?: string;
 }
 
-const { title, page = '' } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const { title } = Astro.props;
+
+// Normalizar base: siempre con trailing slash
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+
+const currentPath = Astro.url.pathname;
 
 const links = [
-  { href: `${base}`,           label: 'Inicio',    key: 'index'     },
-  { href: `${base}apuntes/`,   label: 'Apuntes',   key: 'apuntes'   },
-  { href: `${base}proyectos/`, label: 'Proyectos', key: 'proyectos' },
-  { href: `${base}blog/`,      label: 'Blog',      key: 'blog'      },
-  { href: `${base}sobre/`,     label: 'Sobre mí',  key: 'sobre'     },
+  { href: `${base}/`,           label: 'Inicio'    },
+  { href: `${base}/apuntes/`,   label: 'Apuntes'   },
+  { href: `${base}/proyectos/`, label: 'Proyectos' },
+  { href: `${base}/blog/`,      label: 'Blog'      },
+  { href: `${base}/sobre/`,     label: 'Sobre mí'  },
 ];
+
+function isActive(href: string) {
+  if (href === `${base}/`) return currentPath === href;
+  return currentPath.startsWith(href);
+}
 ---
 
 <!doctype html>
@@ -24,7 +33,7 @@ const links = [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} — Lenin Trinidad</title>
-  <link rel="icon" type="image/png" href={`${base}imagenes/icon.png`} />
+  <link rel="icon" type="image/png" href={`${base}/imagenes/icon.png`} />
 </head>
 <body>
   <header id="site-header">
@@ -34,7 +43,7 @@ const links = [
       </div>
       <nav>
         {links.map(l => (
-          <a href={l.href} class={page === l.key ? 'active' : ''}>
+          <a href={l.href} class={isActive(l.href) ? 'active' : ''}>
             {l.label}
           </a>
         ))}
