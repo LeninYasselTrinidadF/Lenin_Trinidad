@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const entradas = [
+  {
+    titulo: 'Sobre la Organización de la Matemática',
+    fecha: '19-11-2025',
+    resumen: 'Entrada sobre algunas experiencias de la carrera y por qué organizar los apuntes personales.',
+    link: '/Lenin_Trinidad/blogs/entrada1.html',
+  },
+];
+---
+
+<Layout title="Blog" page="blog">
+  <h2>Blog</h2>
+
+  {entradas.map(e => (
+    <article class="project">
+      <h3>
+        {e.titulo}
+        <span class="project-status status-completed">{e.fecha}</span>
+      </h3>
+      <p>{e.resumen}</p>
+      <p><a class="btn" href={e.link}>Leer más</a></p>
+    </article>
+  ))}
+</Layout>

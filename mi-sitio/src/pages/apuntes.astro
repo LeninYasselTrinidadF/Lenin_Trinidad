@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ApuntesTabla from '../components/ApuntesTabla';
+---
+
+<Layout title="Apuntes" page="apuntes">
+  <h2>Apuntes</h2>
+  <p style="text-align:center; color:rgba(255,255,255,0.8); margin-bottom:var(--espacio-xl);">
+    Aquí encontrarás una lista de apuntes personales. Puedes elegir el área de tu interés y explorar
+    los documentos disponibles o elegir directamente de la tabla.
+    Para filtrar los apuntes, utiliza los botones debajo de los destacados o la tabla interactiva.
+    Para reiniciar los filtros, presiona el botón del último apartado destacado.
+  </p>
+
+  <!-- client:load activa React en el navegador -->
+  <ApuntesTabla client:load />
+</Layout>

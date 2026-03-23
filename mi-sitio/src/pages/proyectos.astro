@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const proyectos = [
+  {
+    titulo: 'Apuntes de Cursos Básicos',
+    estado: 'Completado',
+    estadoClass: 'status-completed',
+    descripcion: 'Colección completa de PDFs organizados por área matemática (Análisis, Álgebra, Geometría). Material didáctico desarrollado para facilitar el aprendizaje de conceptos fundamentales.',
+    tags: ['Matemáticas', 'Educación', 'PDF'],
+    link: '/Lenin_Trinidad/apuntes/',
+    linkLabel: 'Explorar Biblioteca',
+  },
+  {
+    titulo: 'Preliminar de Tesis: Inestabilidad Estructural',
+    estado: 'Borrador',
+    estadoClass: 'status-draft',
+    descripcion: 'Documento preliminar sobre bifurcaciones y estabilidad estructural en sistemas dinámicos. Análisis teórico inicial que servirá como base para investigación futura.',
+    tags: ['Análisis', 'Sistemas Dinámicos', 'Investigación'],
+    link: '/Lenin_Trinidad/apuntes/Preliminar.pdf',
+    linkLabel: 'Leer Preliminar (PDF)',
+    external: true,
+  },
+  {
+    titulo: 'Intereses Musicales',
+    estado: 'En desarrollo',
+    estadoClass: 'status-active',
+    descripcion: 'Composiciones musicales pequeñas y arreglos personales. Exploración de la relación entre estructuras matemáticas y patrones musicales.',
+    tags: ['Música', 'Composición', 'Creatividad'],
+    link: 'https://musescore.com/user/58392526',
+    linkLabel: 'Visitar Musescore',
+    external: true,
+  },
+  {
+    titulo: 'Sitio Web Personal',
+    estado: 'Completado',
+    estadoClass: 'status-completed',
+    descripcion: 'Desarrollo y diseño de este sitio web personal como plataforma para compartir conocimiento matemático y conectar con la comunidad académica.',
+    tags: ['Web Development', 'Diseño', 'HTML/CSS'],
+    link: '/Lenin_Trinidad/',
+    linkLabel: 'Visitar Inicio',
+  },
+];
+---
+
+<Layout title="Proyectos" page="proyectos">
+  <h2>Proyectos</h2>
+  <p style="text-align:center; color:rgba(255,255,255,0.8); margin-bottom:var(--espacio-xl);">
+    Aquí encontrarás una colección de mis trabajos personales, investigaciones y desarrollos.
+  </p>
+
+  {proyectos.map(p => (
+    <article class="project">
+      <h3>
+        {p.titulo}
+        <span class={`project-status ${p.estadoClass}`}>{p.estado}</span>
+      </h3>
+      <p>{p.descripcion}</p>
+      <div class="project-tags">
+        {p.tags.map(tag => <span class="project-tag">{tag}</span>)}
+      </div>
+      <p>
+        <a
+          class="btn"
+          href={p.link}
+          target={p.external ? '_blank' : undefined}
+          rel={p.external ? 'noopener' : undefined}
+        >
+          {p.linkLabel}
+        </a>
+      </p>
+    </article>
+  ))}
+</Layout>
