@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import apuntes from '../../data/apuntes.json';
-import titulos from '../../data/titulos.json';
+import apuntes from '../data/apuntes.json';
+import titulos from '../data/titulos.json';
 
 type Apunte = typeof apuntes[0];
 type TitulosData = Record<string, string[]>;
@@ -8,10 +8,10 @@ type TitulosData = Record<string, string[]>;
 const titulosData = titulos as TitulosData;
 
 const categorias = [
-  { key: 'Curso_Colegio',          label: 'Apuntes de Colegio',       estado: 'En desarrollo 2/40'  },
-  { key: 'Preliminares_Tesis',     label: 'Preliminares de Tesis',    estado: 'En desarrollo 3/7'   },
-  { key: 'Apuntes_Complementarios',label: 'Apuntes Complementarios',  estado: 'En desarrollo 2/???' },
-  { key: 'Apuntes_Ingeniería',     label: 'Apuntes de Ingeniería',    estado: 'En desarrollo'       },
+  { key: 'Curso_Colegio', label: 'Apuntes de Colegio', estado: 'En desarrollo 2/40' },
+  { key: 'Preliminares_Tesis', label: 'Preliminares de Tesis', estado: 'En desarrollo 3/7' },
+  { key: 'Apuntes_Complementarios', label: 'Apuntes Complementarios', estado: 'En desarrollo 2/???' },
+  { key: 'Apuntes_Ingeniería', label: 'Apuntes de Ingeniería', estado: 'En desarrollo' },
 ];
 
 function ordenarApuntes(lista: Apunte[]) {
