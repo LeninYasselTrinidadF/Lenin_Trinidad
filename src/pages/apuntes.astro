@@ -3,15 +3,40 @@ import Layout from '../layouts/Layout.astro';
 import ApuntesTabla from '../components/ApuntesTabla';
 ---
 
-<Layout title="Apuntes" page="apuntes">
+<Layout
+  title="Apuntes"
+  description="Colección de apuntes de matemáticas organizados por área: análisis real, ecuaciones diferenciales, álgebra abstracta, sistemas dinámicos y currícula pre-universitaria."
+>
+  <!-- Datos estructurados para Google (Schema.org) -->
+  <script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Apuntes de Matemáticas — Lenin Trinidad",
+    "description": "Colección de apuntes de matemáticas organizados por área: análisis real, ecuaciones diferenciales, álgebra abstracta, sistemas dinámicos y currícula pre-universitaria.",
+    "author": {
+      "@type": "Person",
+      "name": "Lenin Yassel Trinidad Flores",
+      "affiliation": "Universidad Nacional Mayor de San Marcos"
+    },
+    "inLanguage": "es",
+    "about": [
+      { "@type": "Thing", "name": "Análisis real" },
+      { "@type": "Thing", "name": "Ecuaciones diferenciales ordinarias" },
+      { "@type": "Thing", "name": "Sistemas dinámicos" },
+      { "@type": "Thing", "name": "Álgebra abstracta" },
+      { "@type": "Thing", "name": "Geometría analítica" }
+    ]
+  }
+  </script>
+
   <h2>Apuntes</h2>
   <p style="text-align:center; color:rgba(255,255,255,0.8); margin-bottom:var(--espacio-xl);">
     Aquí encontrarás una lista de apuntes personales. Puedes elegir el área de tu interés y explorar
     los documentos disponibles o elegir directamente de la tabla.
-    Para filtrar los apuntes, utiliza los botones debajo de los destacados o la tabla interactiva.
+    Para filtrar los apuntes, utiliza los botones debajo de los destacados.
     Para reiniciar los filtros, presiona el botón del último apartado destacado.
   </p>
 
-  <!-- client:load activa React en el navegador -->
-  <ApuntesTabla client:load />
+  <ApuntesTabla client:idle />
 </Layout>

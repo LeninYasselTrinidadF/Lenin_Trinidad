@@ -3,26 +3,32 @@ import '../styles/global.css';
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title,
+  description = 'Matemáticas, sistemas dinámicos y apuntes claros. Egresado de Matemática en UNMSM, interesado en análisis, álgebra y dinámica.',
+  image = '/imagenes/icon.png',
+} = Astro.props;
 
-// Normalizar base: siempre con trailing slash
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
 
 const currentPath = Astro.url.pathname;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const links = [
-  { href: `${base}/`,           label: 'Inicio'    },
-  { href: `${base}/apuntes/`,   label: 'Apuntes'   },
-  { href: `${base}/proyectos/`, label: 'Proyectos' },
-  { href: `${base}/blog/`,      label: 'Blog'      },
-  { href: `${base}/sobre/`,     label: 'Sobre mí'  },
+  { href: `${base}/`,           label: 'Inicio',    icon: '⌂' },
+  { href: `${base}/apuntes/`,   label: 'Apuntes',   icon: '✎' },
+  { href: `${base}/proyectos/`, label: 'Proyectos', icon: '⬡' },
+  { href: `${base}/blog/`,      label: 'Blog',      icon: '◈' },
+  { href: `${base}/sobre/`,     label: 'Sobre mí',  icon: '∿' },
 ];
 
 function isActive(href: string) {
-  if (href === `${base}/`) return currentPath === href;
+  if (href === `${base}/`) return currentPath === href || currentPath === `${base}`;
   return currentPath.startsWith(href);
 }
 ---
@@ -32,35 +38,338 @@ function isActive(href: string) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>{title} — Lenin Trinidad</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Lenin Yassel Trinidad Flores" />
+  <meta name="keywords" content="matemáticas, sistemas dinámicos, análisis funcional, álgebra, apuntes, UNMSM, bifurcaciones" />
+  <link rel="canonical" href={canonicalURL} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={`${title} — Lenin Trinidad`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${base}${image}`} />
+  <meta property="og:locale" content="es_PE" />
+  <meta property="og:site_name" content="Lenin Trinidad" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={`${title} — Lenin Trinidad`} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${base}${image}`} />
+
   <link rel="icon" type="image/png" href={`${base}/imagenes/icon.png`} />
 </head>
 <body>
-  <header id="site-header">
-    <div class="header-container">
-      <div class="header-title">
-        <h1>Lenin Trinidad</h1>
-      </div>
-      <nav>
+
+  <header id="site-header" class="site-header">
+    <div class="header-inner">
+
+      <!-- Wordmark -->
+      <a href={`${base}/`} class="wordmark" aria-label="Inicio">
+        <span class="wordmark-icon" aria-hidden="true">🧮</span>
+        <span class="wordmark-text">Lenin Trinidad</span>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav-desktop" aria-label="Navegación principal" id="nav-desktop">
         {links.map(l => (
-          <a href={l.href} class={isActive(l.href) ? 'active' : ''}>
-            {l.label}
+          <a
+            href={l.href}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+            class={`nav-link ${isActive(l.href) ? 'nav-link--active' : ''}`}
+          >
+            <span class="nav-link-label">{l.label}</span>
           </a>
         ))}
       </nav>
+
+      <!-- Burger (móvil) -->
+      <button
+        class="burger"
+        id="burger-btn"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+
     </div>
+
+    <!-- Nav móvil (dropdown) -->
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Menú móvil" hidden>
+      {links.map(l => (
+        <a
+          href={l.href}
+          aria-current={isActive(l.href) ? 'page' : undefined}
+          class={`nav-mobile-link ${isActive(l.href) ? 'nav-mobile-link--active' : ''}`}
+        >
+          <span class="nav-mobile-icon" aria-hidden="true">{l.icon}</span>
+          {l.label}
+        </a>
+      ))}
+    </nav>
   </header>
 
   <main class="container">
     <slot />
   </main>
 
+  <style>
+    /* ── Header shell ── */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg,
+        rgba(30, 0, 60, 0.96),
+        rgba(80, 0, 140, 0.96));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(171, 73, 204, 0.18);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .site-header.is-scrolled {
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.5);
+      border-bottom-color: rgba(171, 73, 204, 0.45);
+    }
+
+    /* ── Inner row ── */
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* ── Wordmark ── */
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      flex-shrink: 0;
+      outline-offset: 4px;
+    }
+
+    .wordmark-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .wordmark:hover .wordmark-icon {
+      transform: rotate(-12deg) scale(1.15);
+    }
+
+    .wordmark-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      background: linear-gradient(120deg, #ffffff 30%, #81c7ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Desktop nav ── */
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 7px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.65);
+      letter-spacing: 0.01em;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    /* Hover: frosted pill */
+    .nav-link:not(.nav-link--active):hover {
+      color: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Active: gradient pill */
+    .nav-link--active {
+      color: #ffffff;
+      background: linear-gradient(135deg,
+        rgba(113, 0, 178, 0.6),
+        rgba(30, 145, 237, 0.4));
+      box-shadow:
+        0 0 0 1px rgba(171, 73, 204, 0.4),
+        0 4px 16px rgba(113, 0, 178, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    /* Active glow dot */
+    .nav-link--active::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #81c7ff;
+      box-shadow: 0 0 6px #81c7ff;
+    }
+
+    /* ── Burger button (hidden on desktop) ── */
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      padding: 6px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .burger:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .burger-bar {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+      transform-origin: center;
+    }
+
+    /* Burger → X cuando está abierto */
+    .burger[aria-expanded="true"] .burger-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .burger[aria-expanded="true"] .burger-bar:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+    .burger[aria-expanded="true"] .burger-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── Mobile nav ── */
+    .nav-mobile {
+      display: flex;
+      flex-direction: column;
+      padding: 8px 16px 16px;
+      gap: 4px;
+      border-top: 1px solid rgba(171, 73, 204, 0.2);
+      animation: slideDown 0.22s ease-out both;
+    }
+
+    .nav-mobile[hidden] {
+      display: none;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .nav-mobile-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-mobile-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .nav-mobile-link--active {
+      color: #fff;
+      background: linear-gradient(135deg,
+        rgba(113, 0, 178, 0.55),
+        rgba(30, 145, 237, 0.35));
+      box-shadow: 0 0 0 1px rgba(171, 73, 204, 0.35);
+    }
+
+    .nav-mobile-icon {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+      opacity: 0.75;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .nav-desktop { display: none; }
+      .burger      { display: flex; }
+
+      body { padding-top: 64px; }
+    }
+  </style>
+
   <script>
-    const hdr = document.getElementById('site-header');
-    window.addEventListener('scroll', () => {
-      hdr?.classList.toggle('scrolled', window.scrollY > 10);
-      document.body.classList.toggle('header-scrolled', window.scrollY > 10);
-    }, { passive: true });
+    /* ── Scroll class ── */
+    const hdr = document.getElementById('site-header')!;
+    const onScroll = () => hdr.classList.toggle('is-scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Burger toggle ── */
+    const btn   = document.getElementById('burger-btn')!;
+    const menu  = document.getElementById('nav-mobile')!;
+
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.setAttribute('aria-label', open ? 'Abrir menú' : 'Cerrar menú');
+      if (open) {
+        menu.hidden = true;
+      } else {
+        menu.hidden = false;
+      }
+    });
+
+    /* ── Cerrar al hacer clic en un link ── */
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menu.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
   </script>
+
 </body>
 </html>

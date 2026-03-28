@@ -1,27 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-const entradas = [
-  {
-    titulo: 'Sobre la Organización de la Matemática',
-    fecha: '19-11-2025',
-    resumen: 'Entrada sobre algunas experiencias de la carrera y por qué organizar los apuntes personales.',
-    link: '/Lenin_Trinidad/blogs/entrada1/',
-  },
-];
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+
+const entradas = await getCollection('blog');
+entradas.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 ---
 
-<Layout title="Blog" page="blog">
+<Layout
+  title="Blog"
+  description="Entradas sobre matemáticas, sistemas dinámicos y experiencias académicas."
+>
   <h2>Blog</h2>
 
   {entradas.map(e => (
     <article class="project">
       <h3>
-        {e.titulo}
-        <span class="project-status status-completed">{e.fecha}</span>
+        {e.data.title}
+        <span class="project-status status-completed">{e.data.date}</span>
       </h3>
-      <p>{e.resumen}</p>
-      <p><a class="btn" href={e.link}>Leer más</a></p>
+      <p>{e.data.description}</p>
+      {e.data.tags && (
+        <div class="project-tags">
+          {e.data.tags.map((tag: string) => (
+            <span class="project-tag">{tag}</span>
+          ))}
+        </div>
+      )}
+      <p><a class="btn" href={`${base}/blog/${e.id}/`}>Leer más</a></p>
     </article>
   ))}
 </Layout>

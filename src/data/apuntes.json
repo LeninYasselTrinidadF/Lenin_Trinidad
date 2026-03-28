@@ -60,16 +60,6 @@
     "estado": "20%"
   },
   {
-    "archivo": "apuntes/Preliminar.pdf",
-    "orden": 2,
-    "titulo": "Topología C^k",
-    "contenido": "Capítulo 1 de Preliminares de Tesis",
-    "fecha": "18-11-2025",
-    "area": "Ecuaciones Diferenciales",
-    "nivel": "Pregrado",
-    "estado": "80%"
-  },
-  {
     "titulo": "Enteros",
     "orden": 7,
     "contenido": "Capítulo 7 de curso escolar",
@@ -100,14 +90,84 @@
     "estado": "20%"
   },
   {
-    "titulo": "Tópicos secundarios sobre Derivación",
+    "titulo": "Tópicos de Derivación e Integración",
     "orden": 1,
-    "contenido": "Capítulo 0 de Preliminares de Tesis",
-    "archivo": "apuntes/Preliminar.pdf",
-    "fecha": "2026-10-01",
-    "area": "Análisis",
+    "contenido": "Capítulo 1: Fundamentos de cálculo multilineal y tensores",
+    "archivo": "apuntes/P1_Topicos_Derivacion_Integracion.pdf",
+    "fecha": "2026-02-01",
+    "area": "Análisis Real",
     "nivel": "Pregrado",
-    "estado": "20%"
+    "estado": "Completado"
+  },
+  {
+    "titulo": "Topología C^k",
+    "orden": 2,
+    "contenido": "Capítulo 2: Espacios de funciones y topologías de Whitney",
+    "archivo": "apuntes/P2_Topologia_Ck.pdf",
+    "fecha": "2026-02-01",
+    "area": "Topología",
+    "nivel": "Pregrado",
+    "estado": "80%"
+  },
+  {
+    "titulo": "Espacios Jet",
+    "orden": 3,
+    "contenido": "Capítulo 3: Contacto, jets y Teorema de Transversalidad de Thom",
+    "archivo": "apuntes/P3_Espacios_Jet.pdf",
+    "fecha": "2026-02-01",
+    "area": "Geometría Diferencial",
+    "nivel": "Pregrado",
+    "estado": "En desarrollo"
+  },
+  {
+    "titulo": "Reducción de Lyapunov-Schmidt",
+    "orden": 4,
+    "contenido": "Capítulo 4: Métodos de reducción y bifurcación Silla-Nodo",
+    "archivo": "apuntes/P4_Reduccion_Lyapunov_Schmidt.pdf",
+    "fecha": "2026-02-01",
+    "area": "Sistemas Dinámicos",
+    "nivel": "Pregrado",
+    "estado": "En desarrollo"
+  },
+  {
+    "titulo": "Ramificaciones",
+    "orden": 5,
+    "contenido": "Capítulo 5: Anillos locales y Diagramas de Newton",
+    "archivo": "apuntes/P5_Ramificaciones.pdf",
+    "fecha": "2026-02-01",
+    "area": "Álgebra / Dinámica",
+    "nivel": "Pregrado",
+    "estado": "En desarrollo"
+  },
+  {
+    "titulo": "Deformaciones Versales",
+    "orden": 6,
+    "contenido": "Capítulo 6: Clasificación de campos parametrizados",
+    "archivo": "apuntes/P6_Deformaciones_Versales.pdf",
+    "fecha": "2026-02-01",
+    "area": "Teoría de Singularidades",
+    "nivel": "Pregrado",
+    "estado": "Planeado"
+  },
+  {
+    "titulo": "Variedades Invariantes",
+    "orden": 7,
+    "contenido": "Capítulo 7: Variedad central y suavidad global",
+    "archivo": "apuntes/P7_Variedades_Invariantes.pdf",
+    "fecha": "2026-02-01",
+    "area": "Sistemas Dinámicos",
+    "nivel": "Pregrado",
+    "estado": "Planeado"
+  },
+  {
+    "titulo": "Forma Normal Lineal",
+    "orden": 8,
+    "contenido": "Capítulo 8: Formas normales de Poincaré-Birkhoff y simetría",
+    "archivo": "apuntes/P8_Forma_Normal_Lineal.pdf",
+    "fecha": "2026-02-01",
+    "area": "Sistemas Dinámicos",
+    "nivel": "Pregrado",
+    "estado": "Planeado"
   },
   {
     "titulo": "0",
