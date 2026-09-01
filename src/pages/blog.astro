@@ -13,20 +13,18 @@ entradas.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).
   title="Blog"
   description="Entradas sobre matemáticas, sistemas dinámicos y experiencias académicas."
 >
-  <div style="text-align: center; margin-bottom: var(--espacio-lg);">
-    <h2 style="background: linear-gradient(135deg, var(--prot-beige), var(--ark-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
-      Blog
-    </h2>
-    <p style="color: var(--text-second); font-size: 0.92rem; max-width: 580px; margin: 0 auto;">
+  <header class="page-header">
+    <h2 class="page-title page-title--blog">Blog</h2>
+    <p class="page-subtitle">
       Entradas cortas sobre mis experiencias, reflexiones y notas sobre la organización del conocimiento matemático.
     </p>
-  </div>
+  </header>
 
   {entradas.map(e => (
-    <article class="project" style="border-left-color: var(--prot-orange);">
+    <article class="project project--prot">
       <div class="project-header">
-        <h3 style="color: var(--prot-beige);">{e.data.title}</h3>
-        <span class="badge-date" style="padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-weight: 600; white-space: nowrap;">
+        <h3>{e.data.title}</h3>
+        <span class="badge-date">
           {e.data.date}
         </span>
       </div>
@@ -38,7 +36,7 @@ entradas.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).
           ))}
         </div>
       )}
-      <div style="margin-top: 10px;">
+      <div class="project-actions">
         <a class="btn btn-warm" href={`${base}/blog/${e.id.replace(/\.mdx?$/, '')}/`}>
           Leer entrada →
         </a>

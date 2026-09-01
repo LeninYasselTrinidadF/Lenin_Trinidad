@@ -12,32 +12,28 @@ const categorias = [
     key: 'Curso_Colegio',
     label: 'Apuntes de Colegio',
     estado: 'EN DESARROLLO 2/40',
-    titleColor: 'var(--suwako-hat)',
-    accentGradient: 'linear-gradient(90deg, var(--suwako-dress), var(--ark-navy))',
+    cardClass: 'card-cat-colegio',
     descripcion: 'Curso de 40 sesiones cubriendo material pre-universitario: Aritmética, Álgebra, Geometría y Trigonometría. Enfoque teórico con intuición geométrica y analítica.',
   },
   {
     key: 'Preliminares_Tesis',
     label: 'Preliminares de Tesis',
     estado: 'EN DESARROLLO 3/7',
-    titleColor: 'var(--cirno-ice)',
-    accentGradient: 'linear-gradient(90deg, var(--ark-agua), var(--pol-green))',
+    cardClass: 'card-cat-tesis',
     descripcion: 'Bifurcaciones de campos vectoriales parametrizados, análisis real, ecuaciones diferenciales ordinarias y teoría cualitativa de sistemas dinámicos.',
   },
   {
     key: 'Apuntes_Complementarios',
     label: 'Apuntes Complementarios',
     estado: 'EN DESARROLLO 2/???',
-    titleColor: 'var(--prot-beige)',
-    accentGradient: 'linear-gradient(90deg, var(--prot-orange), var(--ark-gold))',
+    cardClass: 'card-cat-complementarios',
     descripcion: 'Tópicos adicionales que complementan la formación matemática: teoría de semigrupos, análisis funcional y temas avanzados.',
   },
   {
     key: 'Apuntes_Ingeniería',
     label: 'Apuntes de Ingeniería',
     estado: 'EN DESARROLLO',
-    titleColor: 'var(--pol-green)',
-    accentGradient: 'linear-gradient(90deg, var(--pol-green), var(--thales-bright))',
+    cardClass: 'card-cat-ingenieria',
     descripcion: 'Apuntes organizados de temas relacionados con cursos de física, análisis de señales e ingeniería.',
   },
 ];
@@ -50,18 +46,18 @@ function ordenarApuntes(lista: Apunte[]) {
   });
 }
 
-function getEstadoColor(estado: string) {
+function getEstadoClass(estado: string) {
   const norm = estado.toLowerCase();
   if (norm.includes('completado') || norm.includes('listo') || norm.includes('finalizado')) {
-    return 'var(--pol-green)';
+    return 'table-status-completado';
   }
   if (norm.includes('%') || norm.includes('desarrollo') || norm.includes('progreso')) {
-    return 'var(--ark-gold)';
+    return 'table-status-progreso';
   }
   if (norm.includes('borrador') || norm.includes('draft')) {
-    return 'var(--prot-orange)';
+    return 'table-status-borrador';
   }
-  return 'var(--text-second)';
+  return '';
 }
 
 export default function ApuntesTabla() {
@@ -78,10 +74,10 @@ export default function ApuntesTabla() {
     <div>
       <section id="highlights">
         {categorias.map(cat => (
-          <div key={cat.key} className="card">
-            <div className="card-accent" style={{ background: cat.accentGradient }}></div>
+          <div key={cat.key} className={`card ${cat.cardClass}`}>
+            <div className="card-accent"></div>
             <span className="badge badge-dev">{cat.estado}</span>
-            <h3 style={{ color: cat.titleColor }}>{cat.label}</h3>
+            <h3>{cat.label}</h3>
             <p>{cat.descripcion}</p>
             <button
               data-filtro={cat.key}
@@ -93,9 +89,9 @@ export default function ApuntesTabla() {
           </div>
         ))}
 
-        <div className="card" style={{ borderTop: '3px solid var(--thales-water)' }}>
-          <div className="card-accent" style={{ background: 'linear-gradient(90deg, var(--thales-water), var(--nitori-cyan))' }}></div>
-          <h3 style={{ color: 'var(--thales-bright)' }}>Todos los apuntes</h3>
+        <div className="card card-cat-todos">
+          <div className="card-accent"></div>
+          <h3>Todos los apuntes</h3>
           <p>Restablece todos los filtros activos para examinar la totalidad de los documentos y cursos disponibles.</p>
           <button
             className={`filter-btn${filtro === null ? ' active' : ''}`}
@@ -146,7 +142,7 @@ export default function ApuntesTabla() {
               filas.push(
                 <tr key={i}>
                   <td>{a.orden}</td>
-                  <td style={{ color: 'var(--text-main)', fontWeight: 600 }}>{a.titulo}</td>
+                  <td className="table-title">{a.titulo}</td>
                   <td>
                     <a href={`/Lenin_Trinidad/${a.archivo}`} target="_blank" rel="noopener">
                       {a.contenido}
@@ -154,8 +150,8 @@ export default function ApuntesTabla() {
                   </td>
                   <td>{a.area}</td>
                   <td>{a.nivel}</td>
-                  <td style={{ color: getEstadoColor(a.estado), fontWeight: 600 }}>{a.estado}</td>
-                  <td style={{ whiteSpace: 'nowrap' }}>{a.fecha}</td>
+                  <td className={getEstadoClass(a.estado)}>{a.estado}</td>
+                  <td>{a.fecha}</td>
                 </tr>
               );
               return filas;

@@ -9,7 +9,7 @@ const proyectos = [
     titulo: "Apuntes de Cursos Básicos",
     estado: "Completado",
     badgeClass: "badge-completed",
-    borderColor: "var(--suwako-dress)",
+    variantClass: "project--suwako",
     descripcion:
       "Colección completa de PDFs organizados por área matemática (Análisis, Álgebra, Geometría). Material didáctico desarrollado para facilitar el aprendizaje de conceptos fundamentales.",
     tags: ["Matemáticas", "Educación", "PDF"],
@@ -21,7 +21,7 @@ const proyectos = [
     titulo: "Preliminar de Tesis: Inestabilidad Estructural",
     estado: "Borrador",
     badgeClass: "badge-draft",
-    borderColor: "var(--ark-agua)",
+    variantClass: "project--ark",
     descripcion:
       "Documento preliminar sobre bifurcaciones y estabilidad estructural en sistemas dinámicos. Análisis teórico inicial que servirá como base para investigación futura.",
     tags: ["Análisis", "Sistemas Dinámicos", "Investigación"],
@@ -33,7 +33,7 @@ const proyectos = [
     titulo: "PyOASIS",
     estado: "En desarrollo",
     badgeClass: "badge-dev",
-    borderColor: "var(--pol-green)",
+    variantClass: "project--pol",
     descripcion:
       "Interfaz gráfica para el software OASIS de análisis ionosférico.",
     tags: ["Python", "GUI", "Ionosfera"],
@@ -45,7 +45,7 @@ const proyectos = [
     titulo: "Arkhe",
     estado: "En desarrollo",
     badgeClass: "badge-dev",
-    borderColor: "var(--ark-agua)",
+    variantClass: "project--ark",
     descripcion:
       "Visualizador de librería Mathlib. Permite mejorar la experiencia de usuario al momento de aprender y usar la librería.",
     tags: ["Mathlib", "Lean", "Gráficos", "Formalización"],
@@ -57,7 +57,7 @@ const proyectos = [
     titulo: "Intereses Musicales",
     estado: "En desarrollo",
     badgeClass: "badge-dev",
-    borderColor: "var(--prot-orange)",
+    variantClass: "project--prot",
     descripcion:
       "Composiciones musicales pequeñas y arreglos personales. Exploración de la relación entre estructuras matemáticas y patrones musicales.",
     tags: ["Música", "Composición", "Creatividad"],
@@ -69,7 +69,7 @@ const proyectos = [
     titulo: "Sitio Web Personal",
     estado: "Completado",
     badgeClass: "badge-completed",
-    borderColor: "var(--cirno-ice)",
+    variantClass: "project--cirno",
     descripcion:
       "Desarrollo y diseño de este sitio web personal como plataforma para compartir conocimiento matemático y conectar con la comunidad académica.",
     tags: ["Web Development", "Diseño", "HTML/CSS", "Astro"],
@@ -81,16 +81,16 @@ const proyectos = [
 ---
 
 <Layout title="Proyectos">
-  <div style="text-align: center; margin-bottom: var(--espacio-lg);">
-    <h2>Proyectos</h2>
-    <p style="color: var(--text-second); font-size: 0.92rem; max-width: 580px; margin: 0 auto;">
+  <header class="page-header">
+    <h2 class="page-title">Proyectos</h2>
+    <p class="page-subtitle">
       Aquí encontrarás una colección de mis trabajos personales, investigaciones y desarrollos en matemáticas y programación.
     </p>
-  </div>
+  </header>
 
   {
     proyectos.map((p) => (
-      <article class="project" style={`border-left-color: ${p.borderColor}`}>
+      <article class={`project ${p.variantClass}`}>
         <div class="project-header">
           <h3>{p.titulo}</h3>
           <span class={`project-status ${p.badgeClass}`}>{p.estado}</span>
@@ -101,7 +101,7 @@ const proyectos = [
             <span class="project-tag">{tag}</span>
           ))}
         </div>
-        <div style="margin-top: 10px;">
+        <div class="project-actions">
           <a
             class="btn"
             href={p.link}

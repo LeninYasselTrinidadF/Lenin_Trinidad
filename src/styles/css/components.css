@@ -1,11 +1,61 @@
 /* ══════════════════════════════════════════════
-   COMPONENTS — Estilos de componentes adaptados
-   Fuente: Diccionario Visual v3
+   COMPONENTS — Estilos de componentes centralizados
+   Fuente: Diccionario Visual v3 (Controlado por tokens.css)
    ══════════════════════════════════════════════ */
 
 /* ────────────────────────────────────────
-   1. HERO / DESCRIPCIÓN (Inicio & Encabezados)
+   1. ENCABEZADOS DE PÁGINA Y HERO
    ──────────────────────────────────────── */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--espacio-lg);
+}
+
+.page-header-left {
+  text-align: left;
+  margin-bottom: var(--espacio-lg);
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cirno-ice), var(--nitori-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--espacio-xs);
+}
+
+.page-title--blog {
+  background: linear-gradient(135deg, var(--prot-beige), var(--ark-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-title--sobre {
+  background: linear-gradient(135deg, var(--suwako-hat), var(--prot-beige));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  color: var(--text-second);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.page-subtitle-left {
+  color: var(--text-second);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Hero card (Index) */
 #descripcion, .p-hero {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -44,17 +94,8 @@
   max-width: 680px;
 }
 
-.tagline {
-  font-style: italic;
-  margin-top: var(--espacio-sm);
-  color: var(--suwako-hat) !important;
-  padding-left: var(--espacio-sm);
-  border-left: 3px solid var(--suwako-hat);
-  font-size: 0.88rem;
-}
-
 /* ────────────────────────────────────────
-   2. TARJETAS / CARDS GRID (#highlights, .card)
+   2. TARJETAS / CARDS GRID
    ──────────────────────────────────────── */
 #highlights, .p-cards {
   display: grid;
@@ -66,6 +107,7 @@
 
 .p-cards-full {
   grid-template-columns: 1fr;
+  margin-top: 0;
 }
 
 .card, .p-card {
@@ -98,17 +140,34 @@
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
-/* Acentos asignados por tarjeta */
-.card--sobre { border-top: 3px solid var(--suwako-dress); }
-.card--apuntes { border-top: 3px solid var(--ark-agua); }
-.card--proyectos { border-top: 3px solid var(--pol-green); }
-.card--blog { border-top: 3px solid var(--prot-orange); }
+/* Variantes temáticas de tarjeta controladas por CSS */
+.card-sobre .card-accent { background: linear-gradient(90deg, var(--suwako-dress), var(--ark-navy)); }
+.card-sobre h3          { color: var(--suwako-hat); }
 
-/* Selectores nth-child heredados */
-#highlights .card:nth-child(1) { border-top: 3px solid var(--suwako-dress); }
-#highlights .card:nth-child(2) { border-top: 3px solid var(--ark-agua); }
-#highlights .card:nth-child(3) { border-top: 3px solid var(--pol-green); }
-#highlights .card:nth-child(4) { border-top: 3px solid var(--prot-orange); }
+.card-apuntes .card-accent { background: linear-gradient(90deg, var(--ark-agua), var(--nitori-cyan)); }
+.card-apuntes h3          { color: var(--cirno-ice); }
+
+.card-proyectos .card-accent { background: linear-gradient(90deg, var(--pol-green), var(--prot-sage)); }
+.card-proyectos h3          { color: var(--pol-green); }
+
+.card-blog .card-accent { background: linear-gradient(90deg, var(--prot-orange), var(--ark-gold)); }
+.card-blog h3          { color: var(--prot-beige); }
+
+/* Categorías en ApuntesTabla */
+.card-cat-colegio .card-accent { background: linear-gradient(90deg, var(--suwako-dress), var(--ark-navy)); }
+.card-cat-colegio h3          { color: var(--suwako-hat); }
+
+.card-cat-tesis .card-accent { background: linear-gradient(90deg, var(--ark-agua), var(--pol-green)); }
+.card-cat-tesis h3          { color: var(--cirno-ice); }
+
+.card-cat-complementarios .card-accent { background: linear-gradient(90deg, var(--prot-orange), var(--ark-gold)); }
+.card-cat-complementarios h3          { color: var(--prot-beige); }
+
+.card-cat-ingenieria .card-accent { background: linear-gradient(90deg, var(--pol-green), var(--thales-bright)); }
+.card-cat-ingenieria h3          { color: var(--pol-green); }
+
+.card-cat-todos .card-accent { background: linear-gradient(90deg, var(--thales-water), var(--nitori-cyan)); }
+.card-cat-todos h3          { color: var(--thales-bright); }
 
 .card h3, .p-card h3 {
   font-size: 0.98rem;
@@ -116,12 +175,6 @@
   margin: 4px 0 6px;
   padding: 0;
 }
-
-/* Colores de títulos según el personaje */
-#highlights .card:nth-child(1) h3, .card--sobre h3 { color: var(--suwako-hat); }
-#highlights .card:nth-child(2) h3, .card--apuntes h3 { color: var(--cirno-ice); }
-#highlights .card:nth-child(3) h3, .card--proyectos h3 { color: var(--pol-green); }
-#highlights .card:nth-child(4) h3, .card--blog h3 { color: var(--prot-beige); }
 
 .card p, .p-card p {
   color: var(--text-second);
@@ -159,7 +212,7 @@
 }
 
 /* ────────────────────────────────────────
-   3. BADGES DE ESTADO (Tokens de referencia)
+   3. BADGES Y ESTADOS
    ──────────────────────────────────────── */
 .badge, .project-status {
   display: inline-block;
@@ -177,43 +230,44 @@
   z-index: 2;
 }
 
-/* Arkhé / Cirno Sun (Dorado) */
+/* Variantes */
 .badge-new, .badge-dorado {
   background: rgba(209, 176, 135, 0.15);
   color: var(--ark-gold);
   border: 1px solid rgba(209, 176, 135, 0.3);
 }
 
-/* Politoed (Verde cálido) */
 .badge-dev, .status-active {
   background: rgba(141, 198, 91, 0.12);
   color: var(--pol-green);
   border: 1px solid rgba(141, 198, 91, 0.28);
 }
 
-/* Arkhé Agua (Cian) */
 .badge-completed, .status-completed {
   background: rgba(55, 173, 222, 0.12);
   color: var(--ark-agua);
   border: 1px solid rgba(55, 173, 222, 0.28);
 }
 
-/* Protagonista Naranja (Borrador / Aviso) */
 .badge-draft, .status-draft {
   background: rgba(190, 110, 57, 0.15);
   color: var(--prot-orange);
   border: 1px solid rgba(190, 110, 57, 0.3);
 }
 
-/* Protagonista Beige (Fechas) */
 .badge-date {
   background: rgba(207, 197, 163, 0.12);
   color: var(--prot-beige);
   border: 1px solid rgba(207, 197, 163, 0.22);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* ────────────────────────────────────────
-   4. BOTONES (.btn, .filter-btn)
+   4. BOTONES
    ──────────────────────────────────────── */
 .btn {
   display: inline-block;
@@ -273,7 +327,7 @@
 }
 
 /* ────────────────────────────────────────
-   5. SEPARADOR ARCO IRIS (Prisma del Imán)
+   5. SEPARADOR ARCO IRIS (Prisma)
    ──────────────────────────────────────── */
 .area-sep {
   display: flex;
@@ -283,18 +337,14 @@
   overflow: hidden;
 }
 
-.area-seg {
-  flex: 1;
-  height: 100%;
-}
-
+.area-seg { flex: 1; height: 100%; }
 .area-seg-red    { background: var(--rain-red); }
 .area-seg-orange { background: var(--rain-orange); }
 .area-seg-green  { background: var(--rain-green); }
 .area-seg-blue   { background: var(--rain-blue); }
 
 /* ────────────────────────────────────────
-   6. TABLA DE APUNTES (#tabla, .apuntes-table)
+   6. TABLA DE APUNTES
    ──────────────────────────────────────── */
 .table-container {
   width: 100%;
@@ -338,6 +388,15 @@ table tbody td, #tabla tbody td, .apuntes-table td {
   vertical-align: middle;
 }
 
+.table-title {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.table-status-completado { color: var(--pol-green); font-weight: 600; }
+.table-status-progreso   { color: var(--ark-gold); font-weight: 600; }
+.table-status-borrador   { color: var(--prot-orange); font-weight: 600; }
+
 table tbody td a, #tabla tbody td a, .apuntes-table td a {
   color: var(--nitori-blue);
   text-decoration: none;
@@ -350,7 +409,6 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
   text-decoration: underline;
 }
 
-/* Fila separadora por área matemática */
 .area-row, .area-separator {
   background: transparent !important;
 }
@@ -379,7 +437,7 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
 }
 
 /* ────────────────────────────────────────
-   7. PROYECTOS & ARTÍCULOS DE BLOG (.project)
+   7. PROYECTOS & ARTÍCULOS DE BLOG
    ──────────────────────────────────────── */
 .project, .p-project {
   background: var(--card-bg);
@@ -397,6 +455,13 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
   box-shadow: var(--sombra);
 }
 
+/* Variantes de borde de proyecto según temática */
+.project--suwako { border-left-color: var(--suwako-dress); }
+.project--ark    { border-left-color: var(--ark-agua); }
+.project--pol    { border-left-color: var(--pol-green); }
+.project--prot   { border-left-color: var(--prot-orange); }
+.project--cirno  { border-left-color: var(--cirno-ice); }
+
 .project-header {
   display: flex;
   align-items: center;
@@ -412,6 +477,10 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
   margin-bottom: 4px;
 }
 
+.project--prot h3 {
+  color: var(--prot-beige);
+}
+
 .project p, .p-project p {
   color: var(--text-second);
   font-size: 0.88rem;
@@ -419,7 +488,10 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
   margin-bottom: 10px;
 }
 
-/* Tags de proyectos */
+.project-actions {
+  margin-top: 10px;
+}
+
 .project-tags, .tags {
   display: flex;
   gap: 5px;
@@ -438,7 +510,7 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
 }
 
 /* ────────────────────────────────────────
-   8. PÁGINA SOBRE MÍ (.sobre-*)
+   8. PÁGINA SOBRE MÍ
    ──────────────────────────────────────── */
 .sobre-grid, .sobre-contenedor {
   display: grid;
@@ -519,7 +591,11 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
   flex-shrink: 0;
 }
 
-/* Columna lateral de contacto e imagen */
+.exp-title {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
 .sobre-sidebar {
   display: flex;
   flex-direction: column;
@@ -583,13 +659,4 @@ table tbody td a:hover, #tabla tbody td a:hover, .apuntes-table td a:hover {
   font-style: italic;
   font-size: 0.78rem;
   text-align: center;
-}
-
-/* ────────────────────────────────────────
-   9. RESPONSIVE COMPONENT ADJUSTMENTS
-   ──────────────────────────────────────── */
-@media (max-width: 768px) {
-  .sobre-grid, .sobre-contenedor {
-    grid-template-columns: 1fr;
-  }
 }
