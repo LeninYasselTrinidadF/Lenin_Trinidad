@@ -1,38 +1,49 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
 ---
 
-<Layout title="Matemáticas y Enseñanza" page="index">
-  <section id="descripcion">
-    <h2>Matemáticas, enseñanza y apuntes claros</h2>
+<Layout title="Matemáticas y Enseñanza">
+  <!-- Hero Section -->
+  <section id="descripcion" class="p-hero">
+    <h1>Matemáticas, enseñanza y apuntes claros</h1>
     <p>
-      Egresado de la carrera de Matemática: Interés en análisis, álgebra y dinámica.
+      Egresado de la carrera de Matemática: interés en análisis, álgebra y dinámica.
       Comparto apuntes, recursos didácticos, mis proyectos personales y material que considere interesante.
     </p>
   </section>
 
-  <section id="highlights">
-    <a href="sobre/" class="card">
+  <!-- Tarjetas Principales -->
+  <section id="highlights" class="p-cards">
+    <a href={`${base}/sobre/`} class="card card--sobre">
+      <div class="card-accent"></div>
       <h3>Sobre mí</h3>
-      <p>Información Personal y Contacto. Conoce más sobre mi trayectoria académica y mis intereses en matemáticas.</p>
+      <p>Información personal y contacto. Conoce mi trayectoria académica e intereses en matemáticas.</p>
       <span class="card-link">Ver más</span>
     </a>
 
-    <a href="apuntes/" class="card">
-      <div class="badge">Nuevo</div>
+    <a href={`${base}/apuntes/`} class="card card--apuntes">
+      <div class="card-accent"></div>
+      <span class="badge badge-new">NUEVO</span>
       <h3>Apuntes organizados</h3>
-      <p>Presento apuntes de los temas desarrollados en mis cursos dictados y en mi estudio personal.
-        Se actualizarán los archivos periódicamente.</p>
+      <p>Apuntes de los temas desarrollados en mis cursos y en mi estudio personal. Actualizados periódicamente.</p>
       <span class="card-link">Explorar apuntes</span>
     </a>
 
-    <a href="proyectos/" class="card">
+    <a href={`${base}/proyectos/`} class="card card--proyectos">
+      <div class="card-accent"></div>
       <h3>Proyectos</h3>
       <p>Trabajos personales, investigaciones y desarrollos en matemáticas y programación.</p>
       <span class="card-link">Ver proyectos</span>
     </a>
+  </section>
 
-    <a href="blog/" class="card">
+  <!-- Tarjeta Blog Ancho Completo -->
+  <section class="p-cards p-cards-full">
+    <a href={`${base}/blog/`} class="card card--blog">
+      <div class="card-accent"></div>
       <h3>Blog</h3>
       <p>Entradas cortas sobre mis experiencias, reflexiones y descubrimientos matemáticos.</p>
       <span class="card-link">Leer blog</span>

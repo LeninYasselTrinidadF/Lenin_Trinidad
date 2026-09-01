@@ -1,89 +1,150 @@
-/* ═══════════════════════════════════════
-   TOKENS — Variables, reset y base
-   ═══════════════════════════════════════ */
+/* ══════════════════════════════════════════════
+   TOKENS — Colores reales y variables de diseño
+   Fuente: Diccionario Visual v3 (K-means)
+   ══════════════════════════════════════════════ */
 
 :root {
-    /* Paleta */
-    --m1: #3a0066;
-    --m2: #7100b2;
-    --m3: #ab49cc;
-    --a1: #1e91ed;
-    --a2: #81c7ff;
-    --blanco: #ffffff;
-    --negro: #000000;
-    --gris-claro: #f2f2f2;
-    --gris-medio: #d9d9d9;
-    --gris-oscuro: #444444;
+  /* ── 1. Thales / Fondo base y profundidad ── */
+  --thales-deep:   #0D2537;
+  --thales-mid:    #2B4661;
+  --thales-water:  #3E8FB4;
+  --thales-bright: #7ECADA;
 
-    /* Espaciados */
-    --espacio-xs: 5px;
-    --espacio-sm: 10px;
-    --espacio-md: 20px;
-    --espacio-lg: 30px;
-    --espacio-xl: 40px;
+  /* ── 2. Arkhé logo — agua + piedra + prisma ── */
+  --ark-navy:      #0C2170;
+  --ark-agua:      #37ADDE;
+  --ark-stone:     #9CACB4;
+  --ark-dark:      #142029;
+  --ark-gold:      #D1B087;
 
-    /* Bordes y sombras */
-    --radio-borde: 8px;
-    --sombra: 0 4px 12px rgba(0,0,0,0.3);
-    --sombra-fuerte: 0 15px 30px rgba(0,0,0,0.4);
+  /* ── 3. Nitori / Cirno — interacción técnica y títulos ── */
+  --nitori-blue:   #299CCE;
+  --nitori-cyan:   #59BBD7;
+  --cirno-ice:     #92C5DC;
+  --cirno-sun:     #D1B087;
+
+  /* ── 4. Suwako Moriya — secciones personales y calidez ── */
+  --suwako-hat:     #FBE6AC;
+  --suwako-hat-mid: #DFB58C;
+  --suwako-dress:   #6E4FA0;
+  --suwako-dark:    #3D2151;
+  --suwako-rose:    #885F75;
+
+  /* ── 5. Chibi Protagonista — tonos otoñales y badges ── */
+  --prot-dark:     #563924;
+  --prot-brown:    #834D27;
+  --prot-orange:   #BE6E39;
+  --prot-beige:    #CFC5A3;
+  --prot-sage:     #A2B3A0;
+  --prot-cream:    #E2EFDB;
+
+  /* ── 6. Politoed — verdes cálidos (hover / estados) ── */
+  --pol-green:     #8DC65B;
+  --pol-yellow:    #F3E78B;
+
+  /* ── 7. Arco iris del imán — separadores de área ── */
+  --rain-red:      #E84040;
+  --rain-orange:   #D1B087;
+  --rain-green:    #65B05F;
+  --rain-blue:     #3A88D8;
+
+  /* ── Tipografía y textos ── */
+  --text-main:     #EBF3F7;
+  --text-second:   #8BA8C0;
+  --text-muted:    #4A6880;
+
+  /* ── Superficies ── */
+  --card-bg:       rgba(13, 37, 55, 0.92);
+  --card-bg-subtle: rgba(43, 70, 97, 0.45);
+  --card-border:   #2B4661;
+  --card-border-hover: #3E8FB4;
+  --radius:        9px;
+  --radius-sm:     6px;
+  --radius-pill:   20px;
+
+  /* ── Espaciados ── */
+  --espacio-xs:    4px;
+  --espacio-sm:    8px;
+  --espacio-md:    16px;
+  --espacio-lg:    24px;
+  --espacio-xl:    36px;
+
+  /* ── Sombras ── */
+  --sombra:        0 4px 16px rgba(0, 0, 0, 0.25);
+  --sombra-fuerte: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 /* ── Reset ── */
 *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    background: var(--negro);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--blanco);
-    line-height: 1.6;
-    min-height: 100vh;
-    padding-top: 80px;
-    transition: padding-top 0.3s ease;
+  background: var(--thales-deep);
+  color: var(--text-main);
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 64px;
 }
 
-body.header-scrolled {
-    padding-top: 60px;
+/* ── Títulos Globales ── */
+h1, h2, h3, h4 {
+  color: var(--text-main);
+  font-weight: 700;
+  line-height: 1.3;
 }
 
-/* ── Tipografía global ── */
 h2 {
-    font-size: 2rem;
-    color: var(--a2);
-    margin-bottom: var(--espacio-lg);
-    padding-left: var(--espacio-md);
-    background: linear-gradient(90deg, var(--a2), var(--m3));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--cirno-ice), var(--nitori-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--espacio-md);
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--m1); }
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(var(--m2), var(--a1));
-    border-radius: 5px;
+/* ── Scrollbar personalizado ── */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
 }
+
+::-webkit-scrollbar-track {
+  background: var(--thales-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--thales-mid), var(--thales-water));
+  border-radius: 4px;
+  border: 2px solid var(--thales-deep);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(var(--m3), var(--a2));
+  background: linear-gradient(180deg, var(--thales-water), var(--nitori-cyan));
 }
 
 /* ── Accesibilidad ── */
 :focus-visible {
-    outline: 2px solid var(--a1);
-    outline-offset: 2px;
-    border-radius: 2px;
+  outline: 2px solid var(--thales-bright);
+  outline-offset: 2px;
+  border-radius: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
