@@ -1,52 +1,1235 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const rawBase = import.meta.env.BASE_URL;
-const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase;
+const base = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
 ---
 
-<Layout title="Matemáticas y Enseñanza">
-  <!-- Hero Section -->
-  <section id="descripcion" class="p-hero">
-    <h1>Matemáticas, enseñanza y apuntes claros</h1>
-    <p>
-      Egresado de la carrera de Matemática: interés en análisis, álgebra y dinámica.
-      Comparto apuntes, recursos didácticos, mis proyectos personales y material que considere interesante.
-    </p>
+<Layout title="Inicio">
+  <!-- ══════════════════════════════════════
+       HERO — Diagrama BT real + campo vectorial
+       ══════════════════════════════════════ -->
+  <section class="bt-hero" id="bt-hero">
+    <!-- Canvas de campo vectorial: cubre TODO el hero, detrás del texto -->
+    <canvas id="bt-vf-canvas" class="bt-vf-bg" aria-hidden="true"></canvas>
+
+    <!-- Panel izquierdo: copy -->
+    <div class="bt-copy">
+      <p class="bt-kicker">Portafolio personal</p>
+      <h1 class="bt-name">Lenin Trinidad</h1>
+      <p class="bt-role">Br. Matemática · UNMSM</p>
+      <p class="bt-desc">
+        Matemática, computación y sistemas dinámicos. Apuntes, proyectos y todo
+        lo que valga la pena conservar.
+      </p>
+      <div class="bt-region-label" id="bt-region-label" aria-live="polite">
+        <span class="bt-region-dot" id="bt-region-dot"></span>
+        <span id="bt-region-text">Sitúa el cursor en el diagrama</span>
+      </div>
+    </div>
+
+    <!-- Panel derecho: diagrama BT (interactivo) -->
+    <div class="bt-diagram-wrap" id="bt-diagram-wrap">
+      <canvas
+        id="bt-canvas"
+        role="img"
+        aria-label="Diagrama de bifurcación de Bogdanov–Takens"></canvas>
+      <p class="bt-caption">Bogdanov–Takens · espacio de parámetros (μ₁, μ₂)</p>
+    </div>
   </section>
 
-  <!-- Tarjetas Principales -->
-  <section id="highlights" class="p-cards">
-    <a href={`${base}/sobre/`} class="card card-sobre">
-      <div class="card-accent"></div>
-      <h3>Sobre mí</h3>
-      <p>Información personal y contacto. Conoce mi trayectoria académica e intereses en matemáticas.</p>
-      <span class="card-link">Ver más</span>
+  <!-- ══════════════════════════════════════
+       PANELES
+       ══════════════════════════════════════ -->
+  <nav class="panels-grid" aria-label="Secciones del portafolio">
+    <a href={`${base}/sobre/`} class="panel panel-sobre" data-field="sink">
+      <canvas class="panel-vf" aria-hidden="true"></canvas>
+      <div class="panel-content">
+        <span class="panel-idx">01</span>
+        <h2>Sobre mí</h2>
+        <p>
+          Trayectoria, intereses, formación y las áreas de matemática que me
+          interesa explorar.
+        </p>
+        <span class="panel-arrow">conocer perfil →</span>
+      </div>
     </a>
 
-    <a href={`${base}/apuntes/`} class="card card-apuntes">
-      <div class="card-accent"></div>
-      <span class="badge badge-new">NUEVO</span>
-      <h3>Apuntes organizados</h3>
-      <p>Apuntes de los temas desarrollados en mis cursos y en mi estudio personal. Actualizados periódicamente.</p>
-      <span class="card-link">Explorar apuntes</span>
+    <a
+      href={`${base}/apuntes/`}
+      class="panel panel-apuntes"
+      data-field="spiral"
+    >
+      <canvas class="panel-vf" aria-hidden="true"></canvas>
+      <div class="panel-content">
+        <span class="panel-idx">02</span>
+        <h2>Apuntes</h2>
+        <p>
+          Cursos y estudio personal: análisis, álgebra, geometría, ecuaciones
+          diferenciales.
+        </p>
+        <span class="panel-arrow">explorar apuntes →</span>
+      </div>
     </a>
 
-    <a href={`${base}/proyectos/`} class="card card-proyectos">
-      <div class="card-accent"></div>
-      <h3>Proyectos</h3>
-      <p>Trabajos personales, investigaciones y desarrollos en matemáticas y programación.</p>
-      <span class="card-link">Ver proyectos</span>
+    <a
+      href={`${base}/proyectos/`}
+      class="panel panel-proyectos"
+      data-field="limit-cycle"
+    >
+      <canvas class="panel-vf" aria-hidden="true"></canvas>
+      <div class="panel-content">
+        <span class="panel-idx">03</span>
+        <h2>Proyectos</h2>
+        <p>
+          Software, investigación matemática, modelos y proyectos personales.
+        </p>
+        <span class="panel-arrow">ver proyectos →</span>
+      </div>
     </a>
-  </section>
 
-  <!-- Tarjeta Blog Ancho Completo -->
-  <section class="p-cards p-cards-full">
-    <a href={`${base}/blog/`} class="card card-blog">
-      <div class="card-accent"></div>
-      <h3>Blog</h3>
-      <p>Entradas cortas sobre mis experiencias, reflexiones y descubrimientos matemáticos.</p>
-      <span class="card-link">Leer blog</span>
+    <a href={`${base}/blog/`} class="panel panel-blog" data-field="saddle">
+      <canvas class="panel-vf" aria-hidden="true"></canvas>
+      <div class="panel-content">
+        <span class="panel-idx">04</span>
+        <h2>Blog</h2>
+        <p>
+          Ideas, reflexiones y descubrimientos que no encajan en los apuntes
+          formales.
+        </p>
+        <span class="panel-arrow">leer entradas →</span>
+      </div>
     </a>
-  </section>
+  </nav>
 </Layout>
+
+<style>
+  /* ── Hero ── */
+  .bt-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--thales-deep);
+    margin-bottom: var(--espacio-lg);
+  }
+
+  /* Campo vectorial de fondo: cubre TODO el hero */
+  .bt-vf-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+  }
+  .bt-vf-bg.is-visible {
+    opacity: 1;
+  }
+
+  /* Copy */
+  .bt-copy {
+    padding: 52px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .bt-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--thales-water);
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .bt-name {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: none;
+    -webkit-text-fill-color: var(--text-main);
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  .bt-role {
+    font-size: 0.98rem;
+    color: var(--cirno-ice);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .bt-desc {
+    color: var(--text-second);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    max-width: 380px;
+    margin: 4px 0 0;
+  }
+
+  .bt-region-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    min-height: 20px;
+  }
+
+  .bt-region-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    flex-shrink: 0;
+    transition:
+      background 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* Diagrama BT */
+  .bt-diagram-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: stretch;
+    /* altura mínima para que offsetHeight != 0 antes del layout */
+    min-height: 420px;
+  }
+
+  #bt-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+  }
+
+  .bt-caption {
+    position: absolute;
+    bottom: 10px;
+    right: 14px;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-family: ui-monospace, monospace;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* ── Paneles ── */
+  .panels-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: var(--espacio-xl);
+  }
+
+  .panel {
+    position: relative;
+    min-height: 210px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition:
+      border-color 0.22s ease,
+      box-shadow 0.22s ease;
+    background: var(--card-bg);
+  }
+
+  .panel::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--panel-accent);
+    z-index: 3;
+  }
+
+  .panel:hover {
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.35);
+  }
+
+  .panel-sobre {
+    --panel-accent: var(--suwako-dress);
+  }
+  .panel-apuntes {
+    --panel-accent: var(--ark-agua);
+  }
+  .panel-proyectos {
+    --panel-accent: var(--pol-green);
+  }
+  .panel-blog {
+    --panel-accent: var(--prot-orange);
+  }
+
+  .panel-sobre:hover {
+    border-color: var(--suwako-dress);
+  }
+  .panel-apuntes:hover {
+    border-color: var(--ark-agua);
+  }
+  .panel-proyectos:hover {
+    border-color: var(--pol-green);
+  }
+  .panel-blog:hover {
+    border-color: var(--prot-orange);
+  }
+
+  .panel-vf {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .panel:hover .panel-vf {
+    opacity: 1;
+  }
+
+  .panel-content {
+    position: relative;
+    z-index: 2;
+    padding: 28px 30px 24px 34px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 210px;
+    background: linear-gradient(
+      135deg,
+      rgba(13, 37, 55, 0.88) 0%,
+      rgba(13, 37, 55, 0.55) 60%,
+      rgba(13, 37, 55, 0.3) 100%
+    );
+    transition: background 0.35s ease;
+  }
+
+  .panel:hover .panel-content {
+    background: linear-gradient(
+      135deg,
+      rgba(13, 37, 55, 0.78) 0%,
+      rgba(13, 37, 55, 0.4) 60%,
+      rgba(13, 37, 55, 0.18) 100%
+    );
+  }
+
+  .panel-idx {
+    font-family: ui-monospace, monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .panel h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    background: none;
+    -webkit-text-fill-color: var(--panel-accent);
+    color: var(--panel-accent);
+  }
+
+  .panel p {
+    color: var(--text-second);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 380px;
+    flex: 1;
+    margin: 0;
+  }
+
+  .panel-arrow {
+    display: block;
+    margin-top: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--panel-accent);
+    opacity: 0.7;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .panel:hover .panel-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .bt-hero {
+      grid-template-columns: 1fr;
+      min-height: unset;
+    }
+    .bt-diagram-wrap {
+      min-height: 280px;
+    }
+    /* En móvil el texto se superpone al diagrama — mínimo fondo para legibilidad */
+    .bt-copy {
+      padding: 36px 24px 20px;
+      background: rgba(13, 37, 55, 0.6);
+    }
+    .panels-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bt-copy {
+      padding: 28px 18px 16px;
+    }
+    .panel-content {
+      padding: 22px 18px 18px 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel-vf,
+    .bt-vf-bg {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // ════════════════════════════════════════════════════════════════
+  //  DIAGRAMA BOGDANOV–TAKENS
+  //  Sistema normal: ẋ = y, ẏ = μ₁ + μ₂y + x² + xy
+  //
+  //  Curvas de bifurcación (μ₂ < 0):
+  //    SN  (silla-nodo):   μ₁ = 0
+  //    H   (Hopf):         μ₁ = -μ₂²/4
+  //    hom (homoclínica):  μ₁ ≈ -0.927·μ₂²  (aproximación de Dumortier et al.)
+  //
+  //  Layout del canvas:
+  //    μ₁ eje horizontal (crece →), μ₂ eje vertical (crece ↑).
+  //    Punto BT (0,0) en esquina superior-derecha del cuadrante activo.
+  //    Las tres curvas se abren hacia abajo-izquierda desde BT.
+  // ════════════════════════════════════════════════════════════════
+
+  // ── Tipos ────────────────────────────────────────────────────
+
+  interface BTRegion {
+    id: string;
+    color: string;
+    field: string;
+    description: string;
+  }
+
+  interface VFDef {
+    f: (x: number, y: number) => [number, number];
+    color: string;
+    dt: number;
+    speed: number;
+  }
+
+  interface Particle {
+    x: number;
+    y: number;
+    age: number;
+    maxAge: number;
+    trail: [number, number][];
+  }
+
+  // ── Regiones del diagrama BT ─────────────────────────────────
+
+  const BT_REGIONS: BTRegion[] = [
+    {
+      id: "equilibrio",
+      color: "#59BBD7",
+      field: "sink",
+      description: "Dos equilibrios — el inferior es un nodo/espiral estable",
+    },
+    {
+      id: "ciclo",
+      color: "#8DC65B",
+      field: "limit-cycle",
+      description:
+        "Ciclo límite estable entre las curvas de Hopf y homoclínica",
+    },
+    {
+      id: "homoclinica",
+      color: "#D1B087",
+      field: "homoclinic",
+      description: "Por fuera de la homoclínica — la conexión se ha roto",
+    },
+    {
+      id: "sin-eq",
+      color: "#885F75",
+      field: "source",
+      description: "μ₁ > 0 — no existen puntos de equilibrio reales",
+    },
+  ];
+
+  // ── Diagrama BT ──────────────────────────────────────────────
+
+  function drawBTDiagram(
+    ctx: CanvasRenderingContext2D,
+    W: number,
+    H: number,
+    hoveredId: string | null,
+  ): (px: number, py: number) => string | null {
+    ctx.clearRect(0, 0, W, H);
+
+    // Rango: punto BT (0,0) en esquina superior-derecha del cuadrante μ₁<0, μ₂<0
+    // Margen derecho y superior pequeño para que BT quede visible con etiqueta
+    const mu1Min = -1.2,
+      mu1Max = 0.18;
+    const mu2Min = -1.8,
+      mu2Max = 0.18;
+
+    // canvas → parámetros y viceversa
+    function tc(mu1: number, mu2: number): [number, number] {
+      const x = ((mu1 - mu1Min) / (mu1Max - mu1Min)) * W;
+      const y = ((mu2Max - mu2) / (mu2Max - mu2Min)) * H;
+      return [x, y];
+    }
+
+    function cp(px: number, py: number): [number, number] {
+      const mu1 = mu1Min + (px / W) * (mu1Max - mu1Min);
+      const mu2 = mu2Max - (py / H) * (mu2Max - mu2Min);
+      return [mu1, mu2];
+    }
+
+    const N = 400;
+
+    // Parametrización: t ∈ [0,1] → μ₂ ∈ [mu2Min, 0]
+    function mu2ofT(t: number): number {
+      return mu2Min * (1 - t); // mu2Min → 0
+    }
+
+    // Curva SN: μ₁ = 0
+    function snCurve(t: number): [number, number] | null {
+      return tc(0, mu2ofT(t));
+    }
+
+    // Curva Hopf: μ₁ = -μ₂²/4
+    function hopfCurve(t: number): [number, number] | null {
+      const mu2 = mu2ofT(t);
+      const mu1 = -(mu2 * mu2) / 4.0;
+      if (mu1 < mu1Min) return null;
+      return tc(mu1, mu2);
+    }
+
+    // Curva homoclínica: μ₁ ≈ -0.927·μ₂² (Bogdanov 1975 / Dumortier 1991)
+    // El factor 0.927 > 0.25 garantiza el orden correcto SN > H > hom
+    const HOM_COEF = 0.927;
+    function homCurve(t: number): [number, number] | null {
+      const mu2 = mu2ofT(t);
+      const mu1 = -HOM_COEF * mu2 * mu2;
+      if (mu1 < mu1Min) return null;
+      return tc(mu1, mu2);
+    }
+
+    const alpha = (id: string, base: number): number =>
+      hoveredId === id ? base * 2.6 : base;
+
+    // ── Fills de región ──────────────────────────────────────
+
+    function fillBetween(
+      fA: (t: number) => [number, number] | null,
+      fB: (t: number) => [number, number] | null,
+      color: string,
+    ) {
+      ctx.beginPath();
+      let started = false;
+      for (let i = 0; i <= N; i++) {
+        const pt = fA(i / N);
+        if (!pt) continue;
+        if (!started) {
+          ctx.moveTo(pt[0], pt[1]);
+          started = true;
+        } else ctx.lineTo(pt[0], pt[1]);
+      }
+      for (let i = N; i >= 0; i--) {
+        const pt = fB(i / N);
+        if (!pt) continue;
+        ctx.lineTo(pt[0], pt[1]);
+      }
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+
+    // ── Coordenadas clave en canvas ─────────────────────────────
+    // Las esquinas del canvas coinciden exactamente con los extremos del rango:
+    //   (0,0) canvas = (mu1Min, mu2Max),  (W,H) canvas = (mu1Max, mu2Min)
+    const cLeft = 0; // x del borde izquierdo  (μ₁ = mu1Min)
+    const cTop = 0; // y del borde superior    (μ₂ = mu2Max)
+    const cRight = W; // x del borde derecho     (μ₁ = mu1Max)
+    const cBot = H; // y del borde inferior    (μ₂ = mu2Min)
+
+    // Punto BT = origen de parámetros
+    const [cBTx, cBTy] = tc(0, 0);
+
+    // La curva hom sale del canvas por el borde izquierdo (no por el fondo).
+    // mu1 = -HOM_COEF * mu2^2 = mu1Min  =>  mu2_exit = -sqrt(|mu1Min|/HOM_COEF)
+    const mu2HomExit = -Math.sqrt(Math.abs(mu1Min) / HOM_COEF);
+    const [, cHomExitY] = tc(mu1Min, mu2HomExit); // y en canvas donde hom toca el borde izq
+
+    // Ídem para Hopf: mu1 = -mu2^2/4 = mu1Min  =>  mu2_exit = -2*sqrt(|mu1Min|)
+    const mu2HopfExit = -2 * Math.sqrt(Math.abs(mu1Min));
+    // (La curva Hopf también puede salir por el borde izquierdo si mu2HopfExit > mu2Min)
+    const hopfExitsLeft = mu2HopfExit > mu2Min;
+
+    // ── Región sin-eq (μ₁ > 0): banda derecha completa ──────────
+    // Rectángulo desde el eje μ₁=0 hasta el borde derecho, toda la altura
+    {
+      const snX = tc(0, 0)[0]; // x del eje SN = x de BT
+      ctx.beginPath();
+      ctx.moveTo(snX, cTop);
+      ctx.lineTo(cRight, cTop);
+      ctx.lineTo(cRight, cBot);
+      ctx.lineTo(snX, cBot);
+      ctx.closePath();
+      ctx.fillStyle = `rgba(136,95,117,${alpha("sin-eq", 0.12)})`;
+      ctx.fill();
+    }
+
+    // ── Región equilibrio: entre eje SN (μ₁=0) y curva Hopf, en μ₂<0 ──
+    // Path: bajamos por SN (t=1→0 = mu2:0→mu2Min), luego subimos por Hopf (t=0→1).
+    // Hopf puede salir por el borde izq antes de llegar a mu2Min; si es así
+    // cerramos por el borde inferior antes de subir por Hopf.
+    {
+      ctx.beginPath();
+      // Lado SN: de BT (mu2=0) hacia abajo (mu2=mu2Min)
+      for (let i = N; i >= 0; i--) {
+        const pt = snCurve(i / N); // t=1 es mu2=0, t=0 es mu2=mu2Min
+        if (!pt) continue;
+        if (i === N) ctx.moveTo(pt[0], pt[1]);
+        else ctx.lineTo(pt[0], pt[1]);
+      }
+      // Si Hopf sale por el borde izq, cerrar por el fondo
+      if (hopfExitsLeft) {
+        ctx.lineTo(cLeft, cBot);
+      }
+      // Subir por Hopf de t=0 a t=1 (de mu2Min o borde hacia BT)
+      for (let i = 0; i <= N; i++) {
+        const pt = hopfCurve(i / N);
+        if (!pt) continue;
+        ctx.lineTo(pt[0], pt[1]);
+      }
+      ctx.closePath();
+      ctx.fillStyle = `rgba(89,187,215,${alpha("equilibrio", 0.12)})`;
+      ctx.fill();
+    }
+
+    // ── Región ciclo límite: entre Hopf y hom ───────────────────
+    // Misma lógica: hom siempre sale por el borde izq antes que Hopf
+    {
+      ctx.beginPath();
+      // Bajar por Hopf (t=1→0 = mu2:0→salida)
+      for (let i = N; i >= 0; i--) {
+        const pt = hopfCurve(i / N);
+        if (!pt) continue;
+        if (i === N) ctx.moveTo(pt[0], pt[1]);
+        else ctx.lineTo(pt[0], pt[1]);
+      }
+      // Si Hopf sale por el borde izq, bajar por ese borde hasta donde entra hom
+      if (hopfExitsLeft) {
+        ctx.lineTo(cLeft, cHomExitY);
+      }
+      // Subir por hom (t=0→1 = mu2:salida→0)
+      for (let i = 0; i <= N; i++) {
+        const pt = homCurve(i / N);
+        if (!pt) continue;
+        ctx.lineTo(pt[0], pt[1]);
+      }
+      ctx.closePath();
+      ctx.fillStyle = `rgba(141,198,91,${alpha("ciclo", 0.13)})`;
+      ctx.fill();
+    }
+
+    // ── Región homoclínica: exterior a hom, semiplano μ₁≤0, μ₂≤0 ──
+    // Path correcto:
+    //   1. Empezar en esquina inf-izq del canvas
+    //   2. Subir por el borde izquierdo hasta donde hom entra al canvas
+    //   3. Seguir la curva hom hasta BT
+    //   4. Bajar por el eje μ₁=0 (SN) hasta el fondo del canvas
+    //   5. Cruzar el fondo hasta cerrar
+    {
+      ctx.beginPath();
+      ctx.moveTo(cLeft, cBot); // 1. esquina inf-izq
+      ctx.lineTo(cLeft, cHomExitY); // 2. subir por borde izq hasta entrada de hom
+      // 3. seguir la curva hom desde su entrada (mu2HomExit) hasta BT
+      for (let i = 0; i <= N; i++) {
+        const pt = homCurve(i / N);
+        if (!pt) continue;
+        ctx.lineTo(pt[0], pt[1]);
+      }
+      // 4. BT está en (cBTx, cBTy); bajar por μ₁=0 hasta el fondo
+      ctx.lineTo(cBTx, cBot); // 4+5 en un solo lineTo (SN es vertical)
+      ctx.closePath();
+      ctx.fillStyle = `rgba(209,176,135,${alpha("homoclinica", 0.1)})`;
+      ctx.fill();
+    }
+
+    // ── Cuadrante sup-izq (μ₁≤0, μ₂≥0) ────────────────────────
+    // Región por encima del eje μ₂=0 y a la izquierda del eje μ₁=0.
+    // Fill sutil — hit-test responde como 'equilibrio' (misma dinámica estable).
+    {
+      ctx.beginPath();
+      ctx.moveTo(cLeft, cTop); // esquina sup-izq
+      ctx.lineTo(cBTx, cTop); // borde sup hasta μ₁=0
+      ctx.lineTo(cBTx, cBTy); // bajar por μ₁=0 hasta BT (μ₂=0)
+      ctx.lineTo(cLeft, cBTy); // cruzar hacia la izquierda por μ₂=0
+      ctx.closePath();
+      ctx.fillStyle = `rgba(89,187,215,${alpha("equilibrio", 0.05)})`;
+      ctx.fill();
+    }
+
+    // ── Ejes ────────────────────────────────────────────────
+
+    const [ax0, ay0] = tc(mu1Min, 0);
+    const [ax1, ay1] = tc(mu1Max, 0);
+    const [bx0, by0] = tc(0, mu2Min);
+    const [bx1, by1] = tc(0, mu2Max);
+
+    ctx.strokeStyle = "rgba(139,168,192,0.4)";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ctx.moveTo(ax0, ay0);
+    ctx.lineTo(ax1, ay1);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(bx0, by0);
+    ctx.lineTo(bx1, by1);
+    ctx.stroke();
+
+    const drawArrow = (x: number, y: number, angle: number) => {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(-7, -4);
+      ctx.lineTo(-7, 4);
+      ctx.fillStyle = "rgba(139,168,192,0.55)";
+      ctx.fill();
+      ctx.restore();
+    };
+    drawArrow(ax1, ay1, 0);
+    drawArrow(bx1, by1, -Math.PI / 2);
+
+    ctx.fillStyle = "rgba(139,168,192,0.70)";
+    ctx.font = "13px ui-monospace, monospace";
+    ctx.fillText("μ₁", ax1 - 20, ay1 + 15);
+    ctx.fillText("μ₂", bx1 + 5, by1 + 14);
+
+    // ── Curva SN ────────────────────────────────────────────
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#92C5DC";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([]);
+    for (let i = 0; i <= N; i++) {
+      const pt = snCurve(i / N);
+      if (!pt) continue;
+      if (i === 0) ctx.moveTo(pt[0], pt[1]);
+      else ctx.lineTo(pt[0], pt[1]);
+    }
+    ctx.stroke();
+
+    // ── Curva Hopf ──────────────────────────────────────────
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#8DC65B";
+    ctx.lineWidth = 2.2;
+    ctx.setLineDash([]);
+    let hStarted = false;
+    for (let i = 0; i <= N; i++) {
+      const pt = hopfCurve(i / N);
+      if (!pt) continue;
+      if (!hStarted) {
+        ctx.moveTo(pt[0], pt[1]);
+        hStarted = true;
+      } else ctx.lineTo(pt[0], pt[1]);
+    }
+    ctx.stroke();
+
+    // ── Curva homoclínica ────────────────────────────────────
+
+    ctx.beginPath();
+    ctx.setLineDash([5, 4]);
+    ctx.strokeStyle = "#D1B087";
+    ctx.lineWidth = 2;
+    let homStarted = false;
+    for (let i = 0; i <= N; i++) {
+      const pt = homCurve(i / N);
+      if (!pt) continue;
+      if (!homStarted) {
+        ctx.moveTo(pt[0], pt[1]);
+        homStarted = true;
+      } else ctx.lineTo(pt[0], pt[1]);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // ── Punto BT ────────────────────────────────────────────
+
+    const [btX, btY] = tc(0, 0);
+    ctx.beginPath();
+    ctx.arc(btX, btY, 5.5, 0, Math.PI * 2);
+    ctx.fillStyle = "#D1B087";
+    ctx.fill();
+    ctx.strokeStyle = "#0D2537";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.fillStyle = "#D1B087";
+    ctx.font = "12px ui-monospace, monospace";
+    ctx.fillText("BT", btX + 8, btY - 6);
+
+    // ── Etiquetas de curvas ──────────────────────────────────
+
+    ctx.font = "11px ui-monospace, monospace";
+
+    // SN: justo a la derecha del eje μ₁=0
+    {
+      const [lx, ly] = tc(0.02, -0.6);
+      ctx.fillStyle = "#92C5DC";
+      ctx.fillText("SN", lx + 2, ly);
+    }
+
+    // H: a la derecha de la curva Hopf a μ₂=-1.0
+    {
+      const mu2h = -1.0;
+      const [lx, ly] = tc(-(mu2h * mu2h) / 4 + 0.02, mu2h);
+      ctx.fillStyle = "#8DC65B";
+      ctx.fillText("H", lx, ly);
+    }
+
+    // hom: a la derecha de la curva hom a μ₂=-1.0
+    {
+      const mu2h = -1.0;
+      const [lx, ly] = tc(-HOM_COEF * mu2h * mu2h + 0.02, mu2h);
+      ctx.fillStyle = "#D1B087";
+      ctx.fillText("hom", lx, ly);
+    }
+
+    // ── Hit-test ────────────────────────────────────────────
+
+    return function hitTest(px: number, py: number): string | null {
+      const [mu1, mu2] = cp(px, py);
+
+      // μ₁ > 0: sin equilibrios reales
+      if (mu1 > 0) return "sin-eq";
+
+      // μ₁ ≤ 0, μ₂ ≥ 0: cuadrante sup-izq — un equilibrio estable existe
+      if (mu2 >= 0) return "equilibrio";
+
+      // A partir de aquí: μ₁ ≤ 0 y μ₂ < 0
+      const hopfMu1 = -(mu2 * mu2) / 4.0;
+      const homMu1 = -HOM_COEF * mu2 * mu2;
+
+      if (mu1 >= hopfMu1) return "equilibrio"; // entre SN y Hopf
+      if (mu1 >= homMu1) return "ciclo"; // entre Hopf y hom
+      return "homoclinica"; // exterior a hom
+    };
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  CAMPOS VECTORIALES — integración Euler normalizada
+  // ════════════════════════════════════════════════════════════════
+
+  function getVFDef(name: string): VFDef {
+    switch (name) {
+      case "sink":
+        return {
+          f: (x, y) => [-x - 0.3 * y, 0.3 * x - y],
+          color: "#59BBD7",
+          dt: 0.04,
+          speed: 2.0,
+        };
+      case "spiral":
+        return {
+          f: (x, y) => [-0.12 * x - y, x - 0.12 * y],
+          color: "#92C5DC",
+          dt: 0.04,
+          speed: 2.2,
+        };
+      case "limit-cycle":
+        return {
+          f: (x, y) => [y, -x + (1.2 - x * x) * y],
+          color: "#8DC65B",
+          dt: 0.032,
+          speed: 1.8,
+        };
+      case "saddle":
+        return {
+          f: (x, y) => [0.8 * x, -0.8 * y],
+          color: "#D1B087",
+          dt: 0.04,
+          speed: 2.0,
+        };
+      case "source":
+        return {
+          f: (x, y) => [0.18 * x - y, x + 0.18 * y],
+          color: "#885F75",
+          dt: 0.04,
+          speed: 2.0,
+        };
+      case "homoclinic":
+        return {
+          f: (x, y) => [y, x * x - 0.72 + 0.52 * x * y],
+          color: "#D1B087",
+          dt: 0.028,
+          speed: 1.6,
+        };
+      default:
+        return {
+          f: (x, y) => [-x, -y],
+          color: "#59BBD7",
+          dt: 0.04,
+          speed: 2.0,
+        };
+    }
+  }
+
+  class VFRenderer {
+    private ctx: CanvasRenderingContext2D;
+    private def: VFDef;
+    private particles: Particle[] = [];
+    private animId: number | null = null;
+    private N: number;
+    private scale: number;
+    private trailLen: number;
+    W: number;
+    H: number;
+
+    constructor(
+      canvas: HTMLCanvasElement,
+      fieldName: string,
+      w: number,
+      h: number,
+      opts: { N?: number; scale?: number; trailLen?: number } = {},
+    ) {
+      this.W = w;
+      this.H = h;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      this.ctx = canvas.getContext("2d")!;
+      this.ctx.scale(dpr, dpr);
+
+      this.def = getVFDef(fieldName);
+      this.N = opts.N ?? 65;
+      this.scale = opts.scale ?? 3.0;
+      this.trailLen = opts.trailLen ?? 22;
+
+      this.spawn();
+    }
+
+    private rp(): Particle {
+      const s = this.scale * 0.94;
+      const x = (Math.random() * 2 - 1) * s;
+      const y = (Math.random() * 2 - 1) * s;
+      const mx = 55 + Math.floor(Math.random() * 90);
+      return {
+        x,
+        y,
+        age: Math.floor(Math.random() * mx),
+        maxAge: mx,
+        trail: [],
+      };
+    }
+
+    private spawn() {
+      this.particles = Array.from({ length: this.N }, () => this.rp());
+    }
+
+    private p2c(x: number, y: number): [number, number] {
+      return [
+        this.W / 2 + (x / this.scale) * (this.W / 2),
+        this.H / 2 - (y / this.scale) * (this.H / 2),
+      ];
+    }
+
+    private step() {
+      const { f, dt, speed } = this.def;
+      for (const p of this.particles) {
+        const [dx, dy] = f(p.x, p.y);
+        const mag = Math.sqrt(dx * dx + dy * dy) || 1;
+        const s = Math.min(mag, speed);
+        p.x += (dx / mag) * s * dt;
+        p.y += (dy / mag) * s * dt;
+        p.age++;
+
+        p.trail.push(this.p2c(p.x, p.y));
+        if (p.trail.length > this.trailLen) p.trail.shift();
+
+        const oob = Math.abs(p.x) > this.scale || Math.abs(p.y) > this.scale;
+        if (oob || p.age > p.maxAge) Object.assign(p, this.rp());
+      }
+    }
+
+    private draw() {
+      const ctx = this.ctx;
+      ctx.fillStyle = "rgba(13,37,55,0.22)";
+      ctx.fillRect(0, 0, this.W, this.H);
+
+      for (const p of this.particles) {
+        if (p.trail.length < 2) continue;
+        const fade = Math.sin((p.age / p.maxAge) * Math.PI);
+        ctx.beginPath();
+        ctx.moveTo(p.trail[0][0], p.trail[0][1]);
+        for (let i = 1; i < p.trail.length; i++)
+          ctx.lineTo(p.trail[i][0], p.trail[i][1]);
+        ctx.strokeStyle = this.def.color;
+        ctx.globalAlpha = fade * 0.6;
+        ctx.lineWidth = 1.3;
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    start() {
+      if (this.animId !== null) return;
+      const loop = () => {
+        this.step();
+        this.draw();
+        this.animId = requestAnimationFrame(loop);
+      };
+      this.animId = requestAnimationFrame(loop);
+    }
+
+    stop() {
+      if (this.animId !== null) {
+        cancelAnimationFrame(this.animId);
+        this.animId = null;
+      }
+    }
+
+    running() {
+      return this.animId !== null;
+    }
+
+    resize(w: number, h: number) {
+      this.W = w;
+      this.H = h;
+      const dpr = window.devicePixelRatio || 1;
+      const canvas = this.ctx.canvas;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      this.spawn();
+    }
+  }
+
+  // ════════════════════════════════════════════════════════════════
+  //  INICIALIZACIÓN
+  //  Todos los estados se declaran antes de cualquier llamada.
+  //  El dibujo se pospone a requestAnimationFrame para garantizar
+  //  que el layout esté listo y offsetWidth/offsetHeight != 0.
+  // ════════════════════════════════════════════════════════════════
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // ── 1. Diagrama BT ──────────────────────────────────────────
+
+    const btDiagCanvas = document.getElementById(
+      "bt-canvas",
+    ) as HTMLCanvasElement | null;
+    const btVfCanvas = document.getElementById(
+      "bt-vf-canvas",
+    ) as HTMLCanvasElement | null;
+    const diagWrap = document.getElementById(
+      "bt-diagram-wrap",
+    ) as HTMLElement | null;
+    const hero = document.getElementById("bt-hero") as HTMLElement | null;
+    const regionText = document.getElementById("bt-region-text");
+    const regionDot = document.getElementById(
+      "bt-region-dot",
+    ) as HTMLElement | null;
+
+    // --- Estado del diagrama (declarado ANTES de cualquier uso) ---
+    let diagW = 0;
+    let diagH = 0;
+    let diagCtx: CanvasRenderingContext2D | null = null;
+    let hitTest: (px: number, py: number) => string | null = () => null;
+    let currentRegion: string | null = null;
+    let heroVfRenderer: VFRenderer | null = null;
+
+    function setRegion(id: string | null) {
+      if (id === currentRegion) return;
+      currentRegion = id;
+
+      // Redibujar diagrama con resaltado
+      if (diagCtx && diagW && diagH) {
+        hitTest = drawBTDiagram(diagCtx, diagW, diagH, id);
+      }
+
+      // Actualizar etiqueta
+      const def = BT_REGIONS.find((r) => r.id === id);
+      if (regionText) {
+        regionText.textContent = def
+          ? def.description
+          : "Sitúa el cursor en el diagrama";
+      }
+      if (regionDot) {
+        regionDot.style.background = def ? def.color : "var(--text-muted)";
+        regionDot.style.boxShadow = def ? `0 0 8px ${def.color}` : "none";
+      }
+
+      // Campo vectorial sobre TODO el hero
+      if (btVfCanvas && hero) {
+        if (heroVfRenderer) {
+          heroVfRenderer.stop();
+          heroVfRenderer = null;
+        }
+        if (def) {
+          const hw = hero.offsetWidth;
+          const hh = hero.offsetHeight;
+          btVfCanvas.style.width = hw + "px";
+          btVfCanvas.style.height = hh + "px";
+          btVfCanvas.classList.add("is-visible");
+          heroVfRenderer = new VFRenderer(btVfCanvas, def.field, hw, hh, {
+            N: 70,
+            scale: 3.5,
+            trailLen: 18,
+          });
+          heroVfRenderer.start();
+        } else {
+          btVfCanvas.classList.remove("is-visible");
+        }
+      }
+    }
+
+    // Función de inicialización del diagrama — se reintenta hasta que el
+    // wrapper tenga dimensiones reales (layout completo)
+    function initDiagram() {
+      if (!btDiagCanvas || !diagWrap || !hero) return;
+
+      const w = diagWrap.offsetWidth;
+      const h = diagWrap.offsetHeight;
+
+      if (w === 0 || h === 0) {
+        // Layout aún no listo — reintentar en el siguiente frame
+        requestAnimationFrame(initDiagram);
+        return;
+      }
+
+      const dpr = window.devicePixelRatio || 1;
+      btDiagCanvas.width = Math.round(w * dpr);
+      btDiagCanvas.height = Math.round(h * dpr);
+      btDiagCanvas.style.width = w + "px";
+      btDiagCanvas.style.height = h + "px";
+
+      const ctx = btDiagCanvas.getContext("2d")!;
+      ctx.scale(dpr, dpr);
+
+      // Asignar a las variables de estado YA declaradas
+      diagCtx = ctx;
+      diagW = w;
+      diagH = h;
+      hitTest = drawBTDiagram(ctx, w, h, currentRegion);
+
+      // Dimensionar canvas de VF del hero
+      if (btVfCanvas) {
+        btVfCanvas.style.width = hero.offsetWidth + "px";
+        btVfCanvas.style.height = hero.offsetHeight + "px";
+      }
+
+      // Eventos de interacción del diagrama
+      btDiagCanvas.addEventListener("mousemove", (e) => {
+        const rect = btDiagCanvas.getBoundingClientRect();
+        const scaleX = diagW / rect.width;
+        const scaleY = diagH / rect.height;
+        const px = (e.clientX - rect.left) * scaleX;
+        const py = (e.clientY - rect.top) * scaleY;
+        setRegion(hitTest(px, py));
+      });
+
+      btDiagCanvas.addEventListener("mouseleave", () => setRegion(null));
+
+      // Redibujar al redimensionar ventana
+      window.addEventListener(
+        "resize",
+        () => {
+          const nw = diagWrap.offsetWidth;
+          const nh = diagWrap.offsetHeight;
+          if (!nw || !nh || !diagCtx) return;
+          const dpr2 = window.devicePixelRatio || 1;
+          btDiagCanvas.width = Math.round(nw * dpr2);
+          btDiagCanvas.height = Math.round(nh * dpr2);
+          btDiagCanvas.style.width = nw + "px";
+          btDiagCanvas.style.height = nh + "px";
+          diagCtx.setTransform(dpr2, 0, 0, dpr2, 0, 0);
+          diagW = nw;
+          diagH = nh;
+          hitTest = drawBTDiagram(diagCtx, nw, nh, currentRegion);
+
+          if (btVfCanvas && hero) {
+            btVfCanvas.style.width = hero.offsetWidth + "px";
+            btVfCanvas.style.height = hero.offsetHeight + "px";
+            if (heroVfRenderer)
+              heroVfRenderer.resize(hero.offsetWidth, hero.offsetHeight);
+          }
+        },
+        { passive: true },
+      );
+    }
+
+    // Diferir al siguiente frame para que el layout ya tenga dimensiones
+    requestAnimationFrame(initDiagram);
+
+    // ── 2. Campos vectoriales en los paneles ────────────────────
+
+    const panelRenderers = new Map<Element, VFRenderer>();
+
+    function initPanel(panel: HTMLElement) {
+      const fieldName = panel.dataset.field ?? "sink";
+      const canvas = panel.querySelector<HTMLCanvasElement>(".panel-vf");
+      if (!canvas) return;
+
+      const w = panel.offsetWidth;
+      const h = panel.offsetHeight;
+
+      // Reintentar si el panel aún no tiene dimensiones
+      if (!w || !h) {
+        requestAnimationFrame(() => initPanel(panel));
+        return;
+      }
+
+      const r = new VFRenderer(canvas, fieldName, w, h, {
+        N: 55,
+        scale: 3.2,
+        trailLen: 24,
+      });
+      panelRenderers.set(panel, r);
+
+      panel.addEventListener("mouseenter", () => {
+        if (!r.running()) r.start();
+      });
+      panel.addEventListener("mouseleave", () => {
+        setTimeout(() => {
+          if (r.running()) r.stop();
+        }, 550);
+      });
+    }
+
+    requestAnimationFrame(() => {
+      document.querySelectorAll<HTMLElement>(".panel").forEach(initPanel);
+    });
+  });
+</script>
